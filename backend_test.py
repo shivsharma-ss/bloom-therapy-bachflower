@@ -188,11 +188,33 @@ class BachFlowerRemedyAPITester:
         if not self.selection_id:
             return self.log_test("Update Selection", False, "No selection ID available (save test may have failed)")
         
-        test_data = {
-            "symptoms": "updated symptoms: fatigue, exhaustion, burnout"
-        }
+        # The API expects updated_symptoms as query parameter, let's test with URL params
+        url = f"{self.api_url}/remedy-selections/{self.selection_id}?updated_symptoms=updated symptoms: fatigue, exhaustion, burnout"
+        headers = {'Content-Type': 'application/json'}
         
-        success, details, response_data = self.make_request('PUT', f'remedy-selections/{self.selection_id}', test_data)
+        try:
+            response = requests.put(url, headers=headers, timeout=30)
+            success = response.status_code == 200
+            
+            if success:
+                try:
+                    response_data = response.json()
+                except:
+                    response_data = response.text
+            else:
+                try:
+                    response_data = response.json()
+                except:
+                    response_data = response.text
+            
+            details = f"Status: {response.status_code}"
+            if not success:
+                details += f", Response: {str(response_data)[:200]}"
+                
+        except Exception as e:
+            success = False
+            details = f"Request error: {str(e)}"
+            response_data = None
         
         return self.log_test("Update Selection", success, details, response_data)
 
