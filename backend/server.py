@@ -49,7 +49,7 @@ def verify_admin_credentials(credentials: HTTPBasicCredentials = Depends(securit
         raise HTTPException(status_code=401, detail="Invalid admin credentials")
     return credentials.username
 
-# Bach Flower Remedy Knowledge Base
+# Enhanced Bach Flower Remedy Knowledge Base with Detailed Information
 BACH_REMEDIES = {
     "agrimony": {
         "name": "Agrimony",
@@ -57,7 +57,11 @@ BACH_REMEDIES = {
         "emotional_state": "mental torture hidden behind cheerful facade",
         "remedy_for": "Those who hide worries behind a happy mask",
         "category": "oversensitive",
-        "combinations": ["walnut", "mimulus", "white_chestnut"]
+        "combinations": ["walnut", "mimulus", "white_chestnut"],
+        "summary": "For mental torture hidden behind a brave face, helping those who suffer inwardly while appearing cheerful outwardly",
+        "composition": "Agrimonia eupatoria - Common Agrimony flower essence",
+        "effects": "Brings authentic joy and inner peace, helps express true feelings, reduces need to hide behind false cheerfulness",
+        "dosage_notes": "Particularly effective when combined with Walnut for protection from external influences"
     },
     "aspen": {
         "name": "Aspen", 
@@ -65,7 +69,11 @@ BACH_REMEDIES = {
         "emotional_state": "fear of unknown things",
         "remedy_for": "Vague unknown fears and anxieties",
         "category": "fear",
-        "combinations": ["mimulus", "cherry_plum", "rock_rose"]
+        "combinations": ["mimulus", "cherry_plum", "rock_rose"],
+        "summary": "For mysterious fears and apprehensions with no obvious cause, bringing courage to face the unknown",
+        "composition": "Populus tremula - Aspen tree essence",
+        "effects": "Promotes courage and security, reduces irrational fears, brings peace to the sensitive mind",
+        "dosage_notes": "Often combined with Mimulus for comprehensive fear treatment"
     },
     "beech": {
         "name": "Beech",
@@ -73,7 +81,11 @@ BACH_REMEDIES = {
         "emotional_state": "intolerance and criticism of others",
         "remedy_for": "Intolerance and being overly critical",
         "category": "overcare",
-        "combinations": ["willow", "impatiens", "vine"]
+        "combinations": ["willow", "impatiens", "vine"],
+        "summary": "For critical and intolerant attitudes, helping develop understanding and acceptance of others",
+        "composition": "Fagus sylvatica - Beech tree essence",
+        "effects": "Increases tolerance and empathy, reduces critical judgment, promotes understanding",
+        "dosage_notes": "Works well with Willow for releasing resentment"
     },
     "centaury": {
         "name": "Centaury",
@@ -81,7 +93,11 @@ BACH_REMEDIES = {
         "emotional_state": "inability to say no",
         "remedy_for": "Those who cannot say no and are easily exploited",
         "category": "oversensitive",
-        "combinations": ["walnut", "pine", "larch"]
+        "combinations": ["walnut", "pine", "larch"],
+        "summary": "For those who are too eager to please others and cannot assert themselves, building inner strength",
+        "composition": "Centaurium umbellatum - Centaury flower essence",
+        "effects": "Strengthens will power, helps establish boundaries, promotes self-respect",
+        "dosage_notes": "Excellent when paired with Walnut for protection from manipulation"
     },
     "cerato": {
         "name": "Cerato",
@@ -89,7 +105,11 @@ BACH_REMEDIES = {
         "emotional_state": "doubt in own wisdom",
         "remedy_for": "Those who doubt their own judgment",
         "category": "uncertainty",
-        "combinations": ["scleranthus", "wild_oat", "gentian"]
+        "combinations": ["scleranthus", "wild_oat", "gentian"],
+        "summary": "For those who constantly seek others' opinions instead of trusting their own inner wisdom",
+        "composition": "Ceratostigma willmottiana - Cerato flower essence",
+        "effects": "Builds confidence in inner guidance, strengthens decision-making abilities, reduces need for constant validation",
+        "dosage_notes": "Often used with Scleranthus for indecisive personalities"
     },
     "cherry_plum": {
         "name": "Cherry Plum",
@@ -97,7 +117,11 @@ BACH_REMEDIES = {
         "emotional_state": "fear of losing mental control",
         "remedy_for": "Fear of losing control and desperate thoughts",
         "category": "fear",
-        "combinations": ["rock_rose", "aspen", "sweet_chestnut"]
+        "combinations": ["rock_rose", "aspen", "sweet_chestnut"],
+        "summary": "For extreme mental pressure and fear of losing control, one of the key Rescue Remedy ingredients",
+        "composition": "Prunus cerasifera - Cherry Plum flower essence",
+        "effects": "Restores mental balance and calm, prevents breakdown, maintains rational thinking",
+        "dosage_notes": "Core ingredient in Rescue Remedy, excellent for crisis situations"
     },
     "chestnut_bud": {
         "name": "Chestnut Bud",
@@ -105,7 +129,11 @@ BACH_REMEDIES = {
         "emotional_state": "failure to learn from mistakes",
         "remedy_for": "Those who repeat the same mistakes",
         "category": "insufficient_interest",
-        "combinations": ["honeysuckle", "clematis", "wild_rose"]
+        "combinations": ["honeysuckle", "clematis", "wild_rose"],
+        "summary": "For those who fail to learn from experience and keep making the same mistakes",
+        "composition": "Aesculus hippocastanum - Horse Chestnut bud essence",
+        "effects": "Improves learning ability, increases awareness, helps break negative patterns",
+        "dosage_notes": "Combines well with Clematis for better focus and attention"
     },
     "chicory": {
         "name": "Chicory",
@@ -113,7 +141,11 @@ BACH_REMEDIES = {
         "emotional_state": "selfish possessive love",
         "remedy_for": "Possessive love and self-centered care",
         "category": "overcare",
-        "combinations": ["heather", "willow", "beech"]
+        "combinations": ["heather", "willow", "beech"],
+        "summary": "For possessive and manipulative behavior disguised as love and care for others",
+        "composition": "Cichorium intybus - Wild Chicory flower essence",
+        "effects": "Promotes unconditional love, reduces possessiveness, encourages selfless service",
+        "dosage_notes": "Often paired with Heather for those seeking constant attention"
     },
     "clematis": {
         "name": "Clematis",
@@ -121,7 +153,11 @@ BACH_REMEDIES = {
         "emotional_state": "dreamy inattention to present",
         "remedy_for": "Dreaminess and lack of interest in present",
         "category": "insufficient_interest",
-        "combinations": ["wild_rose", "chestnut_bud", "honeysuckle"]
+        "combinations": ["wild_rose", "chestnut_bud", "honeysuckle"],
+        "summary": "For dreamers and escapists who live in their imagination rather than reality, a Rescue Remedy ingredient",
+        "composition": "Clematis vitalba - Wild Clematis flower essence",
+        "effects": "Brings grounding and practical focus, increases interest in life, improves concentration",
+        "dosage_notes": "Key ingredient in Rescue Remedy for shock-induced withdrawal"
     },
     "crab_apple": {
         "name": "Crab Apple",
@@ -129,239 +165,75 @@ BACH_REMEDIES = {
         "emotional_state": "self-hatred and disgust",
         "remedy_for": "Self-disgust and feeling unclean",
         "category": "despondency",
-        "combinations": ["pine", "larch", "elm"]
+        "combinations": ["pine", "larch", "elm"],
+        "summary": "The cleansing remedy for those who feel contaminated or obsessed with imperfection",
+        "composition": "Malus pumila - Wild Crab Apple flower essence",
+        "effects": "Promotes self-acceptance, cleanses negative self-perception, reduces obsessive behavior",
+        "dosage_notes": "Excellent with Pine for guilt-related self-hatred"
+    }
+}
+
+# Popular Bach Flower Combinations for Specific Conditions
+REMEDY_COMBINATIONS = {
+    "anxiety_relief": {
+        "name": "Anxiety Relief Blend",
+        "remedies": ["cherry_plum", "rock_rose", "white_chestnut", "aspen", "mimulus"],
+        "concentrations": {"cherry_plum": 2, "rock_rose": 2, "white_chestnut": 2, "aspen": 2, "mimulus": 2},
+        "total_drops": 10,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily",
+        "purpose": "Comprehensive anxiety management covering panic, worry, and unknown fears",
+        "suitable_for": ["panic attacks", "general anxiety", "worry", "fear", "nervous tension"]
     },
-    "elm": {
-        "name": "Elm",
-        "symptoms": ["overwhelm", "temporary inadequacy", "responsibility burden", "momentary loss of confidence", "feeling inadequate"],
-        "emotional_state": "overwhelmed by responsibility",
-        "remedy_for": "Temporary feelings of being overwhelmed",
-        "category": "despondency",
-        "combinations": ["oak", "olive", "hornbeam"]
+    "depression_support": {
+        "name": "Depression Support Blend",
+        "remedies": ["gentian", "gorse", "mustard", "sweet_chestnut", "wild_rose"],
+        "concentrations": {"gentian": 2, "gorse": 2, "mustard": 2, "sweet_chestnut": 2, "wild_rose": 2},
+        "total_drops": 10,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily",
+        "purpose": "Support for various types of depression and despair",
+        "suitable_for": ["hopelessness", "discouragement", "deep sadness", "despair", "apathy"]
     },
-    "gentian": {
-        "name": "Gentian",
-        "symptoms": ["discouragement", "doubt", "setbacks affect easily", "pessimism", "depression from known cause"],
-        "emotional_state": "discouragement from setbacks",
-        "remedy_for": "Discouragement and doubt from known causes",
-        "category": "uncertainty",
-        "combinations": ["gorse", "mustard", "cerato"]
+    "stress_overwhelm": {
+        "name": "Stress & Overwhelm Blend",
+        "remedies": ["elm", "oak", "agrimony", "white_chestnut", "olive"],
+        "concentrations": {"elm": 2, "oak": 2, "agrimony": 2, "white_chestnut": 2, "olive": 2},
+        "total_drops": 10,
+        "bottle_size": "30ml", 
+        "dosage": "4 drops, 4 times daily",
+        "purpose": "For overwhelmed, overworked, and exhausted individuals",
+        "suitable_for": ["work stress", "overwhelm", "exhaustion", "responsibility burden", "mental fatigue"]
     },
-    "gorse": {
-        "name": "Gorse",
-        "symptoms": ["hopelessness", "despair", "giving up", "no faith in recovery", "pessimism", "lost hope"],
-        "emotional_state": "hopelessness and despair",
-        "remedy_for": "Great hopelessness and despair",
-        "category": "uncertainty",
-        "combinations": ["sweet_chestnut", "gentian", "wild_rose"]
+    "sleep_support": {
+        "name": "Sleep Support Blend",
+        "remedies": ["white_chestnut", "agrimony", "aspen", "rock_rose"],
+        "concentrations": {"white_chestnut": 2, "agrimony": 2, "aspen": 2, "rock_rose": 2},
+        "total_drops": 8,
+        "bottle_size": "30ml",
+        "dosage": "4 drops before bed, repeat if needed",
+        "purpose": "Calming the mind for better sleep",
+        "suitable_for": ["insomnia", "racing thoughts", "nighttime anxiety", "restless sleep"]
     },
-    "heather": {
-        "name": "Heather",
-        "symptoms": ["self-centered", "talkative", "attention seeking", "loneliness", "poor listener", "self-obsessed"],
-        "emotional_state": "self-centered talkativeness",
-        "remedy_for": "Self-centeredness and constant need for attention",
-        "category": "loneliness",
-        "combinations": ["chicory", "impatiens", "water_violet"]
+    "confidence_building": {
+        "name": "Confidence Building Blend",
+        "remedies": ["larch", "cerato", "centaury", "pine", "walnut"],
+        "concentrations": {"larch": 2, "cerato": 2, "centaury": 2, "pine": 2, "walnut": 2},
+        "total_drops": 10,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily",
+        "purpose": "Building self-confidence and inner strength",
+        "suitable_for": ["low self-esteem", "lack of confidence", "self-doubt", "people-pleasing"]
     },
-    "holly": {
-        "name": "Holly",
-        "symptoms": ["hatred", "jealousy", "envy", "revenge", "suspicion", "anger", "vexation"],
-        "emotional_state": "hatred and jealousy",
-        "remedy_for": "Hatred, envy, jealousy and revenge",
-        "category": "oversensitive",
-        "combinations": ["willow", "beech", "vine"]
-    },
-    "honeysuckle": {
-        "name": "Honeysuckle",
-        "symptoms": ["living in past", "nostalgia", "regret", "homesickness", "dwelling on past", "loss of interest in present"],
-        "emotional_state": "living in the past",
-        "remedy_for": "Living in the past and nostalgia",
-        "category": "insufficient_interest",
-        "combinations": ["clematis", "wild_rose", "chestnut_bud"]
-    },
-    "hornbeam": {
-        "name": "Hornbeam",
-        "symptoms": ["mental fatigue", "procrastination", "tiredness before starting", "doubt in ability to cope", "weariness"],
-        "emotional_state": "mental weariness",
-        "remedy_for": "Mental fatigue and procrastination",
-        "category": "uncertainty",
-        "combinations": ["olive", "elm", "oak"]
-    },
-    "impatiens": {
-        "name": "Impatiens",
-        "symptoms": ["impatience", "irritability", "hasty", "tension", "intolerance of slow pace", "quick thinking"],
-        "emotional_state": "impatience and irritability",
-        "remedy_for": "Impatience and irritability with others",
-        "category": "loneliness",
-        "combinations": ["beech", "heather", "vine"]
-    },
-    "larch": {
-        "name": "Larch",
-        "symptoms": ["lack of confidence", "expects failure", "inferiority complex", "hesitation", "despondency"],
-        "emotional_state": "lack of confidence",
-        "remedy_for": "Lack of confidence and expectation of failure",
-        "category": "despondency",
-        "combinations": ["cerato", "centaury", "pine"]
-    },
-    "mimulus": {
-        "name": "Mimulus",
-        "symptoms": ["fear of known things", "shyness", "timidity", "nervousness", "anxiety about specific things", "phobias"],
-        "emotional_state": "fear of known things",
-        "remedy_for": "Fear of known things and shyness",
-        "category": "fear",
-        "combinations": ["aspen", "larch", "agrimony"]
-    },
-    "mustard": {
-        "name": "Mustard",
-        "symptoms": ["depression without cause", "gloom", "melancholy", "sadness", "dark cloud feeling"],
-        "emotional_state": "deep depression without reason",
-        "remedy_for": "Deep depression that comes and goes without reason",
-        "category": "insufficient_interest",
-        "combinations": ["gentian", "gorse", "sweet_chestnut"]
-    },
-    "oak": {
-        "name": "Oak",
-        "symptoms": ["exhaustion but keeps going", "never gives up", "duty bound", "stubborn persistence", "overwork"],
-        "emotional_state": "exhausted but struggling on",
-        "remedy_for": "Those who struggle on despite exhaustion",
-        "category": "despondency",
-        "combinations": ["elm", "olive", "hornbeam"]
-    },
-    "olive": {
-        "name": "Olive",
-        "symptoms": ["complete exhaustion", "drained", "no reserves left", "worn out", "fatigue"],
-        "emotional_state": "complete mental and physical exhaustion",
-        "remedy_for": "Complete exhaustion of mind and body",
-        "category": "insufficient_interest",
-        "combinations": ["oak", "elm", "hornbeam"]
-    },
-    "pine": {
-        "name": "Pine",
-        "symptoms": ["guilt", "self-reproach", "blame self for others' mistakes", "never satisfied with efforts", "apologetic"],
-        "emotional_state": "guilt and self-reproach",
-        "remedy_for": "Guilt and self-reproach",
-        "category": "despondency",
-        "combinations": ["crab_apple", "larch", "centaury"]
-    },
-    "red_chestnut": {
-        "name": "Red Chestnut",
-        "symptoms": ["excessive worry for others", "fearful for loved ones", "anxiety for others' wellbeing", "over-concern"],
-        "emotional_state": "excessive concern for others",
-        "remedy_for": "Excessive worry and fear for others",
-        "category": "overcare",
-        "combinations": ["chicory", "vine", "beech"]
-    },
-    "rescue_remedy": {
-        "name": "Rescue Remedy",
-        "symptoms": ["emergency", "trauma", "shock", "panic", "crisis", "stress", "accident"],
-        "emotional_state": "emergency and crisis situations",
-        "remedy_for": "Emergency situations, trauma, shock and crisis",
-        "category": "emergency",
-        "combinations": ["rock_rose", "impatiens", "cherry_plum", "star_of_bethlehem", "clematis"]
-    },
-    "rock_rose": {
-        "name": "Rock Rose",
-        "symptoms": ["terror", "panic", "nightmare", "extreme fear", "helplessness", "emergency"],
-        "emotional_state": "extreme terror and panic",
-        "remedy_for": "Terror, panic and extreme fear",
-        "category": "fear",
-        "combinations": ["cherry_plum", "aspen", "mimulus"]
-    },
-    "rock_water": {
-        "name": "Rock Water",
-        "symptoms": ["self-denial", "rigidity", "self-discipline", "hard on self", "strict principles", "inflexibility"],
-        "emotional_state": "rigid self-discipline",
-        "remedy_for": "Self-denial and rigid adherence to principles",
-        "category": "overcare",
-        "combinations": ["vine", "beech", "oak"]
-    },
-    "scleranthus": {
-        "name": "Scleranthus",
-        "symptoms": ["indecision", "uncertainty between choices", "mood swings", "hesitation", "vacillation"],
-        "emotional_state": "indecision between alternatives",
-        "remedy_for": "Indecision and uncertainty between two choices",
-        "category": "uncertainty",
-        "combinations": ["cerato", "wild_oat", "gentian"]
-    },
-    "star_of_bethlehem": {
-        "name": "Star of Bethlehem",
-        "symptoms": ["shock", "trauma", "grief", "distress", "after-effects of shock", "comfort"],
-        "emotional_state": "shock and trauma",
-        "remedy_for": "Shock, trauma and grief",
-        "category": "despondency",
-        "combinations": ["sweet_chestnut", "willow", "pine"]
-    },
-    "sweet_chestnut": {
-        "name": "Sweet Chestnut",
-        "symptoms": ["extreme mental anguish", "despair", "limit of endurance", "dark night of soul", "hopelessness"],
-        "emotional_state": "extreme mental anguish",
-        "remedy_for": "Extreme mental anguish and despair",
-        "category": "despondency",
-        "combinations": ["gorse", "cherry_plum", "star_of_bethlehem"]
-    },
-    "vervain": {
-        "name": "Vervain",
-        "symptoms": ["over-enthusiasm", "fanaticism", "strain", "tension", "fixed ideas", "missionary zeal"],
-        "emotional_state": "over-enthusiasm and strain",
-        "remedy_for": "Over-enthusiasm and fixed ideas",
-        "category": "overcare",
-        "combinations": ["vine", "impatiens", "beech"]
-    },
-    "vine": {
-        "name": "Vine",
-        "symptoms": ["dominating", "inflexible", "tyrannical", "arrogant", "ruthless", "ambitious", "leadership"],
-        "emotional_state": "domination and inflexibility",
-        "remedy_for": "Dominating behavior and inflexibility",
-        "category": "overcare",
-        "combinations": ["beech", "vervain", "impatiens"]
-    },
-    "walnut": {
-        "name": "Walnut",
-        "symptoms": ["influenced by others", "life changes", "transition", "protection from change", "easily led"],
-        "emotional_state": "influenced by change and others",
-        "remedy_for": "Protection during change and transition",
-        "category": "oversensitive",
-        "combinations": ["centaury", "cerato", "agrimony"]
-    },
-    "water_violet": {
-        "name": "Water Violet",
-        "symptoms": ["pride", "aloofness", "superiority", "independence", "withdrawn", "self-reliant"],
-        "emotional_state": "proud aloofness",
-        "remedy_for": "Pride and aloof superiority",
-        "category": "loneliness",
-        "combinations": ["impatiens", "heather", "vine"]
-    },
-    "white_chestnut": {
-        "name": "White Chestnut",
-        "symptoms": ["persistent thoughts", "mental arguments", "worrying thoughts", "insomnia", "racing mind"],
-        "emotional_state": "persistent unwanted thoughts",
-        "remedy_for": "Persistent unwanted thoughts and mental arguments",
-        "category": "insufficient_interest",
-        "combinations": ["agrimony", "clematis", "mustard"]
-    },
-    "wild_oat": {
-        "name": "Wild Oat",
-        "symptoms": ["uncertainty about life path", "ambition without direction", "dissatisfaction", "unclear goals"],
-        "emotional_state": "uncertainty about life direction",
-        "remedy_for": "Uncertainty about life direction and goals",
-        "category": "uncertainty",
-        "combinations": ["scleranthus", "cerato", "gentian"]
-    },
-    "wild_rose": {
-        "name": "Wild Rose",
-        "symptoms": ["apathy", "resignation", "lack of interest", "drift through life", "no effort", "acceptance of fate"],
-        "emotional_state": "resignation and apathy",
-        "remedy_for": "Apathy and resignation to circumstances",
-        "category": "insufficient_interest",
-        "combinations": ["clematis", "honeysuckle", "gorse"]
-    },
-    "willow": {
-        "name": "Willow",
-        "symptoms": ["resentment", "bitterness", "self-pity", "victim mentality", "blame others", "grudges"],
-        "emotional_state": "resentment and bitterness",
-        "remedy_for": "Resentment and bitter thoughts",
-        "category": "despondency",
-        "combinations": ["holly", "beech", "chicory"]
+    "grief_healing": {
+        "name": "Grief Healing Blend", 
+        "remedies": ["star_of_bethlehem", "sweet_chestnut", "willow", "honeysuckle"],
+        "concentrations": {"star_of_bethlehem": 2, "sweet_chestnut": 2, "willow": 2, "honeysuckle": 2},
+        "total_drops": 8,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily",
+        "purpose": "Support during grief and loss",
+        "suitable_for": ["loss", "bereavement", "trauma", "shock", "emotional pain"]
     }
 }
 
