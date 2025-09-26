@@ -24,7 +24,15 @@ function App() {
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userSelections, setUserSelections] = useState([]);
-  const [userId] = useState(() => `user_${Date.now()}_${Math.random().toString(36).substring(2)}`);
+  const [userId] = useState(() => {
+    // Get existing user ID from localStorage or create new one
+    let storedUserId = localStorage.getItem('bach_flower_user_id');
+    if (!storedUserId) {
+      storedUserId = `user_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+      localStorage.setItem('bach_flower_user_id', storedUserId);
+    }
+    return storedUserId;
+  });
   const [activeTab, setActiveTab] = useState('analyze');
   const [adminSources, setAdminSources] = useState([]);
   const [newSource, setNewSource] = useState({ type: 'text', content: '', url: '' });
