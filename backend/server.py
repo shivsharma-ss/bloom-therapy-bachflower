@@ -521,67 +521,106 @@ BACH_REMEDIES = {
     }
 }
 
-# Popular Bach Flower Combinations for Specific Conditions
+# Popular Bach Flower Combinations with Traditional Concentrations
 REMEDY_COMBINATIONS = {
-    "anxiety_relief": {
-        "name": "Anxiety Relief Blend",
-        "remedies": ["cherry_plum", "rock_rose", "white_chestnut", "aspen", "mimulus"],
-        "concentrations": {"cherry_plum": 2, "rock_rose": 2, "white_chestnut": 2, "aspen": 2, "mimulus": 2},
+    "rescue_remedy": {
+        "name": "Rescue Remedy (Original Bach Formula)",
+        "remedies": ["rock_rose", "impatiens", "cherry_plum", "star_of_bethlehem", "clematis"],
+        "concentrations": {"rock_rose": 2, "impatiens": 2, "cherry_plum": 2, "star_of_bethlehem": 2, "clematis": 2},
         "total_drops": 10,
         "bottle_size": "30ml",
+        "dosage": "4 drops directly or 4 drops in water, can repeat every 20-30 minutes in crisis",
+        "purpose": "Dr. Bach's original crisis formula for emergency situations, trauma, and acute stress",
+        "suitable_for": ["emergency", "trauma", "shock", "panic", "accident", "crisis", "extreme stress"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
+    },
+    "anxiety_relief": {
+        "name": "Anxiety & Fear Relief",
+        "remedies": ["mimulus", "aspen", "cherry_plum", "rock_rose", "white_chestnut", "agrimony"],
+        "concentrations": {"mimulus": 3, "aspen": 2, "cherry_plum": 2, "rock_rose": 1, "white_chestnut": 2, "agrimony": 2},
+        "total_drops": 12,
+        "bottle_size": "30ml",
         "dosage": "4 drops, 4 times daily",
-        "purpose": "Comprehensive anxiety management covering panic, worry, and unknown fears",
-        "suitable_for": ["panic attacks", "general anxiety", "worry", "fear", "nervous tension"]
+        "purpose": "Comprehensive anxiety management covering known fears, unknown fears, panic, and racing thoughts",
+        "suitable_for": ["anxiety", "fear", "panic attacks", "phobias", "nervousness", "worry"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
     },
     "depression_support": {
-        "name": "Depression Support Blend",
-        "remedies": ["gentian", "gorse", "mustard", "sweet_chestnut", "wild_rose"],
-        "concentrations": {"gentian": 2, "gorse": 2, "mustard": 2, "sweet_chestnut": 2, "wild_rose": 2},
-        "total_drops": 10,
+        "name": "Depression & Despair Support",
+        "remedies": ["gentian", "gorse", "mustard", "sweet_chestnut", "wild_rose", "willow"],
+        "concentrations": {"gentian": 2, "gorse": 3, "mustard": 3, "sweet_chestnut": 2, "wild_rose": 2, "willow": 1},
+        "total_drops": 13,
         "bottle_size": "30ml",
-        "dosage": "4 drops, 4 times daily",
-        "purpose": "Support for various types of depression and despair",
-        "suitable_for": ["hopelessness", "discouragement", "deep sadness", "despair", "apathy"]
-    },
-    "stress_overwhelm": {
-        "name": "Stress & Overwhelm Blend",
-        "remedies": ["elm", "oak", "agrimony", "white_chestnut", "olive"],
-        "concentrations": {"elm": 2, "oak": 2, "agrimony": 2, "white_chestnut": 2, "olive": 2},
-        "total_drops": 10,
-        "bottle_size": "30ml", 
-        "dosage": "4 drops, 4 times daily",
-        "purpose": "For overwhelmed, overworked, and exhausted individuals",
-        "suitable_for": ["work stress", "overwhelm", "exhaustion", "responsibility burden", "mental fatigue"]
+        "dosage": "4 drops, 4 times daily, increase to 6 times if needed",
+        "purpose": "Support for various types of depression, despair, and emotional darkness",
+        "suitable_for": ["depression", "hopelessness", "despair", "sadness", "melancholy", "apathy"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
     },
     "sleep_support": {
-        "name": "Sleep Support Blend",
-        "remedies": ["white_chestnut", "agrimony", "aspen", "rock_rose"],
-        "concentrations": {"white_chestnut": 2, "agrimony": 2, "aspen": 2, "rock_rose": 2},
-        "total_drops": 8,
+        "name": "Sleep & Mental Peace",
+        "remedies": ["white_chestnut", "agrimony", "aspen", "vervain"],
+        "concentrations": {"white_chestnut": 4, "agrimony": 2, "aspen": 2, "vervain": 1},
+        "total_drops": 9,
         "bottle_size": "30ml",
-        "dosage": "4 drops before bed, repeat if needed",
-        "purpose": "Calming the mind for better sleep",
-        "suitable_for": ["insomnia", "racing thoughts", "nighttime anxiety", "restless sleep"]
+        "dosage": "4 drops before bed, can repeat once during night if needed",
+        "purpose": "Calming racing thoughts and hidden worries for better sleep",
+        "suitable_for": ["insomnia", "racing thoughts", "nighttime anxiety", "restless sleep", "overthinking"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
     },
     "confidence_building": {
-        "name": "Confidence Building Blend",
-        "remedies": ["larch", "cerato", "centaury", "pine", "walnut"],
-        "concentrations": {"larch": 2, "cerato": 2, "centaury": 2, "pine": 2, "walnut": 2},
-        "total_drops": 10,
-        "bottle_size": "30ml",
-        "dosage": "4 drops, 4 times daily",
-        "purpose": "Building self-confidence and inner strength",
-        "suitable_for": ["low self-esteem", "lack of confidence", "self-doubt", "people-pleasing"]
+        "name": "Confidence & Self-Worth",
+        "remedies": ["larch", "cerato", "centaury", "pine", "walnut", "crab_apple"],
+        "concentrations": {"larch": 3, "cerato": 2, "centaury": 2, "pine": 2, "walnut": 2, "crab_apple": 1},
+        "total_drops": 12,
+        "bottle_size": "30ml", 
+        "dosage": "4 drops, 4 times daily for 3-4 weeks minimum",
+        "purpose": "Building self-confidence, inner strength, and healthy boundaries",
+        "suitable_for": ["low self-esteem", "lack of confidence", "self-doubt", "people-pleasing", "guilt"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
     },
     "grief_healing": {
-        "name": "Grief Healing Blend", 
-        "remedies": ["star_of_bethlehem", "sweet_chestnut", "willow", "honeysuckle"],
-        "concentrations": {"star_of_bethlehem": 2, "sweet_chestnut": 2, "willow": 2, "honeysuckle": 2},
-        "total_drops": 8,
+        "name": "Grief & Loss Support",
+        "remedies": ["star_of_bethlehem", "sweet_chestnut", "willow", "honeysuckle", "pine"],
+        "concentrations": {"star_of_bethlehem": 4, "sweet_chestnut": 2, "willow": 2, "honeysuckle": 2, "pine": 1},
+        "total_drops": 11,
         "bottle_size": "30ml",
-        "dosage": "4 drops, 4 times daily",
-        "purpose": "Support during grief and loss",
-        "suitable_for": ["loss", "bereavement", "trauma", "shock", "emotional pain"]
+        "dosage": "4 drops, 4 times daily, can increase frequency during acute grief",
+        "purpose": "Support during grief, loss, bereavement, and trauma recovery",
+        "suitable_for": ["grief", "loss", "bereavement", "trauma", "shock", "emotional pain"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
+    },
+    "stress_overwhelm": {
+        "name": "Stress & Overwhelm Relief", 
+        "remedies": ["elm", "oak", "olive", "hornbeam", "impatiens"],
+        "concentrations": {"elm": 3, "oak": 2, "olive": 3, "hornbeam": 2, "impatiens": 2},
+        "total_drops": 12,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily during stressful periods",
+        "purpose": "For overwhelmed, overworked individuals reaching their limits",
+        "suitable_for": ["work stress", "overwhelm", "exhaustion", "responsibility burden", "burnout"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
+    },
+    "exam_performance": {
+        "name": "Exam & Performance Support",
+        "remedies": ["larch", "clematis", "chestnut_bud", "white_chestnut", "elm"],
+        "concentrations": {"larch": 2, "clematis": 3, "chestnut_bud": 2, "white_chestnut": 2, "elm": 1},
+        "total_drops": 10,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily starting 2 weeks before exams",
+        "purpose": "Enhancing focus, confidence, and learning ability for academic performance",
+        "suitable_for": ["exam anxiety", "poor concentration", "lack of confidence", "overwhelm", "memory issues"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
+    },
+    "relationship_harmony": {
+        "name": "Relationship & Communication",
+        "remedies": ["chicory", "heather", "beech", "willow", "holly", "water_violet"],
+        "concentrations": {"chicory": 2, "heather": 2, "beech": 2, "willow": 1, "holly": 1, "water_violet": 2},
+        "total_drops": 10,
+        "bottle_size": "30ml",
+        "dosage": "4 drops, 4 times daily during relationship difficulties",
+        "purpose": "Improving relationships, communication, and reducing negative emotions toward others",
+        "suitable_for": ["relationship issues", "jealousy", "possessiveness", "criticism", "resentment"],
+        "preservative": "1 tsp brandy or apple cider vinegar"
     }
 }
 
