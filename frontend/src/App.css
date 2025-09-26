@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -7,41 +7,43 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
-  color: #334155;
-  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #ecfeff 100%);
+  color: #e2e8f0;
+  background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .App {
   min-height: 100vh;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar for dark theme */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #1e293b;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: linear-gradient(135deg, #7c3aed, #0891b2);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
 }
 
 /* Smooth transitions for interactive elements */
-button {
-  transition: all 0.2s ease-in-out;
+button, input, textarea, select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-button:hover {
+button:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
@@ -49,62 +51,122 @@ button:active {
   transform: translateY(0);
 }
 
-/* Card hover effects */
+/* Enhanced card hover effects */
 .card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 20px 40px -12px rgba(139, 92, 246, 0.25),
+    0 0 0 1px rgba(139, 92, 246, 0.1);
 }
 
-/* Loading animation */
-@keyframes pulse {
+/* Glow effects */
+.glow-purple {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.glow-teal {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Loading animation with Bach flower theme */
+@keyframes bloom {
   0%, 100% {
-    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    opacity: 0.7;
   }
   50% {
-    opacity: 0.5;
+    transform: scale(1.1) rotate(180deg);
+    opacity: 1;
   }
 }
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.animate-bloom {
+  animation: bloom 2s ease-in-out infinite;
+}
+
+@keyframes pulse-color {
+  0%, 100% {
+    background: linear-gradient(135deg, #7c3aed, #0891b2);
+  }
+  50% {
+    background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  }
+}
+
+.animate-pulse-color {
+  animation: pulse-color 3s ease-in-out infinite;
+}
+
+/* Floating particles effect */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+.floating-particle {
+  animation: float 4s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
 /* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #059669, #0891b2);
+.gradient-text-purple-teal {
+  background: linear-gradient(135deg, #a855f7, #14b8a6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Custom focus styles */
-input:focus, textarea:focus {
+.gradient-text-purple-pink {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom focus styles for dark theme */
+input:focus, 
+textarea:focus, 
+select:focus,
+button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+  box-shadow: 
+    0 0 0 2px rgba(139, 92, 246, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.1);
 }
 
 /* Badge animations */
 .badge-animate {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .badge-animate:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
 /* Tab animations */
 .tab-content {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -112,9 +174,9 @@ input:focus, textarea:focus {
   }
 }
 
-/* Recommendation card styles */
+/* Recommendation card enhanced styles */
 .recommendation-card {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -126,8 +188,8 @@ input:focus, textarea:focus {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease-in-out;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  transition: left 0.6s ease-in-out;
 }
 
 .recommendation-card:hover::before {
@@ -135,11 +197,50 @@ input:focus, textarea:focus {
 }
 
 .recommendation-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(139, 92, 246, 0.1);
 }
 
-/* Responsive design helpers */
+/* Bach flower themed decorative elements */
+.flower-bg {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+}
+
+/* Remedy category color coding */
+.category-fear {
+  border-left: 4px solid #ef4444;
+}
+
+.category-uncertainty {
+  border-left: 4px solid #f59e0b;
+}
+
+.category-insufficient_interest {
+  border-left: 4px solid #8b5cf6;
+}
+
+.category-loneliness {
+  border-left: 4px solid #06b6d4;
+}
+
+.category-oversensitive {
+  border-left: 4px solid #10b981;
+}
+
+.category-despondency {
+  border-left: 4px solid #6366f1;
+}
+
+.category-overcare {
+  border-left: 4px solid #f97316;
+}
+
+/* Responsive design helpers for darker theme */
 @media (max-width: 768px) {
   .responsive-grid {
     grid-template-columns: 1fr;
@@ -153,100 +254,201 @@ input:focus, textarea:focus {
   .responsive-padding {
     padding: 1rem;
   }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  .recommendation-card:hover {
+    transform: translateY(-2px);
+  }
 }
 
-/* Loading spinner */
+/* Loading spinner for dark theme */
 .loading-spinner {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #e2e8f0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(139, 92, 246, 0.2);
   border-radius: 50%;
-  border-top-color: #059669;
+  border-top-color: #8b5cf6;
   animation: spin 1s ease-in-out infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to { 
+    transform: rotate(360deg); 
+  }
 }
 
-/* Success/Error states */
+/* Success/Error states for dark theme */
 .success-state {
-  background: linear-gradient(135deg, #dcfce7, #f0fdf4);
-  border-color: #bbf7d0;
-  color: #166534;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
 }
 
 .error-state {
-  background: linear-gradient(135deg, #fee2e2, #fef2f2);
-  border-color: #fecaca;
-  color: #dc2626;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
 }
 
 /* Admin panel specific styles */
 .admin-panel {
-  background: linear-gradient(135deg, #fff7ed, #fefce8);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(88, 28, 135, 0.3));
 }
 
-.knowledge-source-card {
-  transition: all 0.2s ease-in-out;
+.vector-visualization {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(8, 145, 178, 0.1));
 }
 
-.knowledge-source-card:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+.graph-visualization {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(249, 115, 22, 0.1));
 }
 
-/* Selection history styles */
+/* Selection history enhanced styles */
 .selection-history {
-  max-height: 60vh;
+  max-height: 70vh;
   overflow-y: auto;
 }
 
 .selection-item {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
 }
 
 .selection-item:hover {
-  background: #f1f5f9;
+  background: rgba(139, 92, 246, 0.05);
   transform: translateX(4px);
+  border-left: 3px solid #8b5cf6;
 }
 
-/* Typography enhancements */
+/* Typography enhancements for dark theme */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
 }
 
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #047857, #059669);
+.text-gradient-purple {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-teal {
-  background: linear-gradient(135deg, #0f766e, #0891b2);
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Backdrop blur enhancement */
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #059669, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced backdrop blur */
 .backdrop-blur-enhanced {
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
-/* Custom shadows */
-.shadow-soft {
-  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 4px 12px -4px rgba(0, 0, 0, 0.05);
+/* Custom shadows for dark theme */
+.shadow-glow-purple {
+  box-shadow: 
+    0 4px 14px 0 rgba(139, 92, 246, 0.15),
+    0 10px 25px 0 rgba(139, 92, 246, 0.1);
 }
 
-.shadow-medium {
-  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+.shadow-glow-teal {
+  box-shadow: 
+    0 4px 14px 0 rgba(6, 182, 212, 0.15),
+    0 10px 25px 0 rgba(6, 182, 212, 0.1);
 }
 
-.shadow-strong {
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 16px 32px -8px rgba(0, 0, 0, 0.08);
+.shadow-glow-emerald {
+  box-shadow: 
+    0 4px 14px 0 rgba(16, 185, 129, 0.15),
+    0 10px 25px 0 rgba(16, 185, 129, 0.1);
+}
+
+/* Combination card styles */
+.combination-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.combination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px -10px rgba(16, 185, 129, 0.2),
+    0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+/* Remedy details modal enhancements */
+.remedy-modal {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(88, 28, 135, 0.95));
+  backdrop-filter: blur(20px);
+}
+
+/* Interactive elements enhancements */
+.interactive-element {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+/* Animated background elements */
+.bg-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.bg-particle-1 {
+  width: 4px;
+  height: 4px;
+  background: #8b5cf6;
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.bg-particle-2 {
+  width: 6px;
+  height: 6px;
+  background: #06b6d4;
+  animation: float 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.bg-particle-3 {
+  width: 3px;
+  height: 3px;
+  background: #10b981;
+  animation: float 10s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* Print styles for remedy information */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .recommendation-card,
+  .combination-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
 }
