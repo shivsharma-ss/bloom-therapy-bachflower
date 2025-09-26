@@ -379,7 +379,7 @@ class RemedySelection(BaseModel):
     user_id: str
     symptoms: str
     nlp_mode: bool = False
-    recommendations: List[Dict[str, Any]]
+    recommendations: Dict[str, Any]  # Changed from List to Dict
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class RemedySelectionCreate(BaseModel):
