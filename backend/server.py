@@ -612,7 +612,7 @@ async def save_remedy_selection(selection: RemedySelectionCreate):
         user_id=selection.user_id,
         symptoms=selection.symptoms,
         nlp_mode=selection.nlp_mode,
-        recommendations=[recommendations_response]  # Wrap in list as expected by model
+        recommendations=recommendations_response  # Now it's a Dict as expected
     )
     
     # Save to database
