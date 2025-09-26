@@ -701,7 +701,7 @@ def create_embeddings(text_list: List[str]) -> np.ndarray:
     return embedding_model.encode(text_list)
 
 def find_vector_matches(query_symptoms: str, top_k: int = 2) -> List[Dict[str, Any]]:
-    """Find matches using vector similarity"""
+    """Find matches using vector similarity with 1-10 relevance scoring"""
     
     # Create remedy texts for embedding
     remedy_texts = []
@@ -728,20 +728,38 @@ def find_vector_matches(query_symptoms: str, top_k: int = 2) -> List[Dict[str, A
         remedy_id = remedy_ids[idx]
         remedy_data = BACH_REMEDIES[remedy_id]
         
+        # Convert similarity to 1-10 relevance score
+        relevance_score = min(10, max(1, round(similarities[idx] * 10)))
+        
+        # Get related remedies from combinations
+        related_remedies = []
+        for combo_id in remedy_data.get('combinations', []):
+            if combo_id in BACH_REMEDIES:
+                related_remedies.append({
+                    'id': combo_id,
+                    'name': BACH_REMEDIES[combo_id]['name'],
+                    'summary': BACH_REMEDIES[combo_id]['summary']
+                })
+        
         matches.append({
             'remedy_id': remedy_id,
             'remedy_name': remedy_data['name'],
             'similarity_score': float(similarities[idx]),
+            'relevance_score': relevance_score,
             'symptoms': remedy_data['symptoms'],
             'remedy_for': remedy_data['remedy_for'],
             'category': remedy_data['category'],
+            'summary': remedy_data['summary'],
+            'composition': remedy_data['composition'],
+            'effects': remedy_data['effects'],
+            'related_remedies': related_remedies,
             'method': 'vector_similarity'
         })
     
     return matches
 
 def find_knowledge_graph_matches(symptoms: str, top_k: int = 2) -> List[Dict[str, Any]]:
-    """Find matches using knowledge graph analysis"""
+    """Find matches using knowledge graph analysis with 1-10 relevance scoring"""
     
     symptom_words = set(symptoms.lower().split())
     
@@ -772,23 +790,37 @@ def find_knowledge_graph_matches(symptoms: str, top_k: int = 2) -> List[Dict[str
     top_matches = sorted_remedies[:top_k]
     
     matches = []
-    for remedy_id, score in top_matches:
-        if score > 0:  # Only include remedies with some relevance
+    for remedy_id, raw_score in top_matches:
+        if raw_score > 0:  # Only include remedies with some relevance
             remedy_data = BACH_REMEDIES[remedy_id]
+            
+            # Convert raw score to 1-10 relevance scale
+            relevance_score = min(10, max(1, round(raw_score / 2)))
             
             # Get connected remedies for combination suggestions
             connected_remedies = []
             if knowledge_graph.has_node(remedy_id):
                 neighbors = list(knowledge_graph.neighbors(remedy_id))
-                connected_remedies = [BACH_REMEDIES[n]['name'] for n in neighbors[:3]]
+                connected_remedies = [
+                    {
+                        'id': neighbor,
+                        'name': BACH_REMEDIES[neighbor]['name'],
+                        'summary': BACH_REMEDIES[neighbor]['summary']
+                    }
+                    for neighbor in neighbors[:3]
+                ]
             
             matches.append({
                 'remedy_id': remedy_id,
                 'remedy_name': remedy_data['name'],
-                'relevance_score': score,
+                'raw_score': raw_score,
+                'relevance_score': relevance_score,
                 'symptoms': remedy_data['symptoms'],
                 'remedy_for': remedy_data['remedy_for'],
                 'category': remedy_data['category'],
+                'summary': remedy_data['summary'],
+                'composition': remedy_data['composition'],
+                'effects': remedy_data['effects'],
                 'connected_remedies': connected_remedies,
                 'method': 'knowledge_graph'
             })
