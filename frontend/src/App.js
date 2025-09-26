@@ -255,7 +255,17 @@ function App() {
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+        <Tabs value={activeTab} onValueChange={(newTab) => {
+          setActiveTab(newTab);
+          // Reload selections when switching to selections tab
+          if (newTab === 'selections') {
+            loadUserSelections();
+          }
+          // Load admin sources when switching to admin tab
+          if (newTab === 'admin') {
+            loadAdminSources();
+          }
+        }} className="space-y-8">
           <TabsList className="grid w-full grid-cols-3 bg-white/60 backdrop-blur-sm">
             <TabsTrigger value="analyze" data-testid="analyze-tab">Analyze Symptoms</TabsTrigger>
             <TabsTrigger value="selections" data-testid="selections-tab">My Selections</TabsTrigger>
