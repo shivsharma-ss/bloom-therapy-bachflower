@@ -24,6 +24,7 @@ function App() {
   const [recommendations, setRecommendations] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userSelections, setUserSelections] = useState([]);
+  const [loadingSelections, setLoadingSelections] = useState(false);
   const [userId] = useState(() => {
     // Get existing user ID from localStorage or create new one
     let storedUserId = localStorage.getItem('bach_flower_user_id');
