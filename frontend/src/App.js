@@ -280,7 +280,7 @@ function App() {
   };
 
   const RecommendationCard = ({ recommendation, type }) => (
-    <Card className="h-full bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-purple-500/20 backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
+    <Card className="h-full bg-gradient-to-br from-slate-800/50 to-slate-900/50 border-purple-500/20 backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-500 hover:scale-105 card-hover">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <TooltipProvider>
@@ -288,7 +288,7 @@ function App() {
               <TooltipTrigger asChild>
                 <button 
                   onClick={() => fetchRemedyDetails(recommendation.remedy_id)}
-                  className="text-purple-200 hover:text-purple-100 font-bold text-lg"
+                  className="text-purple-200 hover:text-purple-100 font-bold text-lg transition-all duration-300 hover:scale-110"
                 >
                   {recommendation.remedy_name}
                 </button>
@@ -300,9 +300,9 @@ function App() {
           </TooltipProvider>
           
           <Badge variant={type === 'vector_recommendation' ? 'default' : 'secondary'} 
-                 className={type === 'vector_recommendation' 
-                   ? 'bg-teal-600 text-white' 
-                   : 'bg-orange-600 text-white'}>
+                 className={`${type === 'vector_recommendation' 
+                   ? 'bg-teal-600 text-white animate-pulse-color' 
+                   : 'bg-orange-600 text-white animate-pulse-color'} transition-all duration-300`}>
             {type === 'vector_recommendation' ? (
               <><Database className="w-3 h-3 mr-1" /> Vector Analysis</>
             ) : (
@@ -310,24 +310,29 @@ function App() {
             )}
           </Badge>
         </CardTitle>
-        <CardDescription className="text-slate-300">{recommendation.category}</CardDescription>
+        <CardDescription className="text-slate-300 animate-fadeInUp">{recommendation.category}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div>
+          <div className="animate-fadeInUp" style={{animationDelay: '0.1s'}}>
             <h4 className="font-medium text-sm text-purple-200 mb-1 flex items-center gap-1">
               <Heart className="w-3 h-3" /> Remedy For:
             </h4>
             <p className="text-sm text-slate-300">{recommendation.remedy_for}</p>
           </div>
           
-          <div>
+          <div className="animate-fadeInUp" style={{animationDelay: '0.2s'}}>
             <h4 className="font-medium text-sm text-purple-200 mb-1 flex items-center gap-1">
               <Flower2 className="w-3 h-3" /> Key Symptoms:
             </h4>
             <div className="flex flex-wrap gap-1">
               {recommendation.symptoms.slice(0, 4).map((symptom, idx) => (
-                <Badge key={idx} variant="outline" className="text-xs border-purple-400/30 text-purple-200">
+                <Badge 
+                  key={idx} 
+                  variant="outline" 
+                  className="text-xs border-purple-400/30 text-purple-200 hover:bg-purple-600/20 transition-all duration-300 badge-animate"
+                  style={{animationDelay: `${idx * 0.1}s`}}
+                >
                   {symptom}
                 </Badge>
               ))}
@@ -339,29 +344,32 @@ function App() {
             </div>
           </div>
 
-          {/* Scoring Information */}
-          <div className="grid grid-cols-2 gap-3">
-            {recommendation.similarity_score && (
-              <div className="bg-slate-800/50 p-2 rounded">
-                <h5 className="text-xs text-teal-200 font-medium flex items-center gap-1">
-                  <Zap className="w-3 h-3" /> Similarity Score
-                </h5>
-                <p className="text-sm text-white font-bold">{(recommendation.similarity_score * 100).toFixed(1)}%</p>
-              </div>
-            )}
-            {recommendation.relevance_score && (
-              <div className="bg-slate-800/50 p-2 rounded">
-                <h5 className="text-xs text-orange-200 font-medium flex items-center gap-1">
-                  <Star className="w-3 h-3" /> Relevance Score
-                </h5>
-                <p className="text-sm text-white font-bold">{recommendation.relevance_score}/10</p>
-              </div>
-            )}
+          {/* Enhanced Scoring Information */}
+          <div className="grid grid-cols-2 gap-3 animate-fadeInUp" style={{animationDelay: '0.3s'}}>
+            <div className="bg-slate-800/50 p-2 rounded hover:bg-slate-700/50 transition-all duration-300">
+              <h5 className="text-xs text-teal-200 font-medium flex items-center gap-1">
+                <Zap className="w-3 h-3" /> Similarity Score
+              </h5>
+              <p className="text-sm text-white font-bold">
+                {recommendation.similarity_score ? 
+                  `${(recommendation.similarity_score * 100).toFixed(1)}%` : 
+                  'N/A'
+                }
+              </p>
+            </div>
+            <div className="bg-slate-800/50 p-2 rounded hover:bg-slate-700/50 transition-all duration-300">
+              <h5 className="text-xs text-orange-200 font-medium flex items-center gap-1">
+                <Star className="w-3 h-3" /> Relevance Score
+              </h5>
+              <p className="text-sm text-white font-bold">
+                {recommendation.relevance_score || 'N/A'}/10
+              </p>
+            </div>
           </div>
 
           {/* Related/Connected Remedies */}
           {(recommendation.related_remedies || recommendation.connected_remedies) && (
-            <div>
+            <div className="animate-fadeInUp" style={{animationDelay: '0.4s'}}>
               <h4 className="font-medium text-sm text-purple-200 mb-2 flex items-center gap-1">
                 <Sparkles className="w-3 h-3" /> Related Remedies:
               </h4>
@@ -372,8 +380,9 @@ function App() {
                       <TooltipTrigger asChild>
                         <Badge 
                           variant="secondary" 
-                          className="text-xs bg-purple-700/30 text-purple-100 hover:bg-purple-600/40 cursor-pointer"
+                          className="text-xs bg-purple-700/30 text-purple-100 hover:bg-purple-600/40 cursor-pointer transition-all duration-300 interactive-element"
                           onClick={() => fetchRemedyDetails(remedy.id || remedy)}
+                          style={{animationDelay: `${idx * 0.05}s`}}
                         >
                           {remedy.name || remedy}
                         </Badge>
@@ -393,27 +402,51 @@ function App() {
   );
 
   const CombinationCard = ({ combination }) => (
-    <Card className="bg-gradient-to-br from-emerald-800/50 to-teal-900/50 border-emerald-500/20">
+    <Card className="bg-gradient-to-br from-emerald-800/50 to-teal-900/50 border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-500 combination-card">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-emerald-200">
-          <FlaskConical className="w-5 h-5" />
+          <FlaskConical className="w-5 h-5 animate-pulse" />
           {combination.name}
         </CardTitle>
         <CardDescription className="text-emerald-300">{combination.purpose}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm text-emerald-200">
+          <div className="flex items-center gap-2 text-sm text-emerald-200 animate-fadeInUp">
             <Droplets className="w-4 h-4" />
             <span>{combination.total_drops} drops in {combination.bottle_size}</span>
+            <Badge variant="outline" className="text-xs border-emerald-400/30 text-emerald-200">
+              + {combination.preservative}
+            </Badge>
           </div>
           
-          <div>
-            <h5 className="font-medium text-emerald-200 mb-1">Remedies in this blend:</h5>
+          <div className="animate-fadeInUp" style={{animationDelay: '0.1s'}}>
+            <h5 className="font-medium text-emerald-200 mb-2 flex items-center gap-1">
+              <Beaker className="w-4 h-4" /> 
+              Remedies in this blend:
+            </h5>
             <div className="space-y-1">
               {combination.remedies.map((remedy, idx) => (
-                <div key={idx} className="flex justify-between items-center text-sm">
-                  <span className="text-emerald-100">{remedy.name}</span>
+                <div 
+                  key={idx} 
+                  className="flex justify-between items-center text-sm bg-emerald-800/20 p-2 rounded hover:bg-emerald-700/30 transition-all duration-300"
+                  style={{animationDelay: `${idx * 0.05}s`}}
+                >
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button 
+                          onClick={() => fetchRemedyDetails(remedy.id)}
+                          className="text-emerald-100 hover:text-emerald-50 transition-colors"
+                        >
+                          {remedy.name}
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="text-sm max-w-xs">{remedy.summary}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                   <Badge variant="outline" className="text-xs border-emerald-400/30 text-emerald-200">
                     {remedy.drops} drops
                   </Badge>
@@ -422,8 +455,12 @@ function App() {
             </div>
           </div>
           
-          <div className="text-xs text-emerald-300 bg-emerald-800/30 p-2 rounded">
-            <strong>Dosage:</strong> {combination.dosage}
+          <div className="text-xs text-emerald-300 bg-emerald-800/30 p-3 rounded animate-fadeInUp" style={{animationDelay: '0.3s'}}>
+            <div className="space-y-1">
+              <div><strong>Dosage:</strong> {combination.dosage}</div>
+              <div><strong>Bottle:</strong> {combination.bottle_size} with {combination.preservative}</div>
+              <div><strong>Total:</strong> {combination.total_drops} drops of remedies</div>
+            </div>
           </div>
         </div>
       </CardContent>
