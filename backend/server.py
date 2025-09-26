@@ -1192,8 +1192,23 @@ async def get_remedy_details(remedy_id: str):
         'connected_remedies': connected_remedies
     }
 
+@api_router.post("/admin/login")
+async def admin_login(credentials: HTTPBasicCredentials = Depends(security)):
+    """Admin login endpoint"""
+    
+    try:
+        # Verify credentials
+        verify_admin_credentials(credentials)
+        return {
+            "message": "Login successful",
+            "username": credentials.username,
+            "access_level": "admin"
+        }
+    except HTTPException:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
 # Admin Routes
-@api_router.post("/admin/knowledge-sources", response_model=AdminKnowledgeSource)
+@api_router.post("/admin/knowledge-sources", dependencies=[Depends(verify_admin_credentials)], response_model=AdminKnowledgeSource)
 async def add_knowledge_source(source: AdminKnowledgeSourceCreate):
     """Add a new knowledge source for admin"""
     
