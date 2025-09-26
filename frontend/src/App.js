@@ -397,10 +397,23 @@ function App() {
           <TabsContent value="selections" className="space-y-6">
             <Card className="bg-white/60 backdrop-blur-sm border-emerald-200">
               <CardHeader>
-                <CardTitle className="text-emerald-800">Your Remedy Selections</CardTitle>
-                <CardDescription>
-                  View and edit your saved Bach flower remedy recommendations
-                </CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-emerald-800">Your Remedy Selections</CardTitle>
+                    <CardDescription>
+                      View and edit your saved Bach flower remedy recommendations
+                    </CardDescription>
+                  </div>
+                  <Button 
+                    onClick={loadUserSelections}
+                    variant="outline"
+                    size="sm"
+                    disabled={loadingSelections}
+                    data-testid="refresh-selections-button"
+                  >
+                    {loadingSelections ? 'Loading...' : 'Refresh'}
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
                 {loadingSelections ? (
