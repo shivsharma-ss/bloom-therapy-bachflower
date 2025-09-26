@@ -17,6 +17,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './comp
 import { toast } from 'sonner';
 import { Toaster } from './components/ui/sonner';
 
+// Import custom components
+import NetworkGraph from './components/NetworkGraph';
+import VectorVisualization from './components/VectorVisualization';
+
 // Import icons from Lucide React
 import { 
   Flower2, 
@@ -47,7 +51,9 @@ import {
   Star,
   Gem,
   Palette,
-  Wand2
+  Wand2,
+  TrendingUp,
+  Activity
 } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
