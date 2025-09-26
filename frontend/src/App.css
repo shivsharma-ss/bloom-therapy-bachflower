@@ -158,11 +158,7 @@ button:focus {
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
-/* Tab animations */
-.tab-content {
-  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* Enhanced animations and UX elements */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -171,6 +167,383 @@ button:focus {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-float {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 10s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Enhanced interactive elements */
+.interactive-element {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Card hover effects with enhanced animations */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 
+    0 25px 50px -12px rgba(139, 92, 246, 0.25),
+    0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+/* Enhanced badge animations */
+.badge-animate {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-animate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.badge-animate:hover::before {
+  left: 100%;
+}
+
+.badge-animate:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+/* Loading states with better animations */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(139, 92, 246, 0.2);
+  border-radius: 50%;
+  border-top-color: #8b5cf6;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 2s infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Combination card enhanced animations */
+.combination-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.combination-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(16, 185, 129, 0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.combination-card:hover::before {
+  transform: translateX(100%);
+}
+
+.combination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px -10px rgba(16, 185, 129, 0.2),
+    0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+/* Network graph container animations */
+.network-container {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Enhanced button animations */
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+button:hover::before {
+  transform: translateX(100%);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Input focus animations */
+input:focus, 
+textarea:focus, 
+select:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 2px rgba(139, 92, 246, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.1);
+  transform: scale(1.02);
+}
+
+/* Tab transition animations */
+.tab-content {
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tooltip enhanced animations */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Particle animation for background */
+.bg-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.1;
+  animation: float-particle 8s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateY(-30px) rotate(180deg);
+    opacity: 0.3;
+  }
+}
+
+.bg-particle-1 {
+  width: 6px;
+  height: 6px;
+  background: #8b5cf6;
+  animation-delay: 0s;
+  top: 20%;
+  left: 10%;
+}
+
+.bg-particle-2 {
+  width: 4px;
+  height: 4px;
+  background: #06b6d4;
+  animation-delay: 2s;
+  top: 60%;
+  right: 20%;
+}
+
+.bg-particle-3 {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  animation-delay: 4s;
+  bottom: 30%;
+  left: 60%;
+}
+
+/* Success/Error state animations */
+.success-state {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.error-state {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Responsive animations */
+@media (max-width: 768px) {
+  .card-hover:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .combination-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .interactive-element:hover {
+    transform: none;
+    filter: brightness(1.05);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-hover:hover {
+    border-color: #ffffff;
+  }
+  
+  .badge-animate:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
