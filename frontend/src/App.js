@@ -45,10 +45,17 @@ function App() {
 
   const loadUserSelections = async () => {
     try {
+      setLoadingSelections(true);
       const response = await axios.get(`${API}/remedy-selections/${userId}`);
       setUserSelections(response.data);
+      console.log('Loaded selections for user:', userId, 'Count:', response.data.length);
     } catch (error) {
       console.error('Error loading selections:', error);
+      if (error.response?.status !== 404) {
+        toast.error('Error loading your saved selections');
+      }
+    } finally {
+      setLoadingSelections(false);
     }
   };
 
