@@ -1220,7 +1220,7 @@ async def add_knowledge_source(source: AdminKnowledgeSourceCreate):
     
     return knowledge_source
 
-@api_router.get("/admin/knowledge-sources", response_model=List[AdminKnowledgeSource])
+@api_router.get("/admin/knowledge-sources", dependencies=[Depends(verify_admin_credentials)], response_model=List[AdminKnowledgeSource])
 async def get_knowledge_sources():
     """Get all knowledge sources"""
     
@@ -1232,7 +1232,7 @@ async def get_knowledge_sources():
     
     return [AdminKnowledgeSource(**source) for source in sources]
 
-@api_router.post("/admin/rebuild-knowledge-base")
+@api_router.post("/admin/rebuild-knowledge-base", dependencies=[Depends(verify_admin_credentials)])
 async def rebuild_knowledge_base():
     """Rebuild the knowledge base from stored sources"""
     
