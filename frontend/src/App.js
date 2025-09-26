@@ -74,6 +74,12 @@ function App() {
       return;
     }
 
+    // Additional validation for meaningful input
+    if (symptoms.trim().length < 3) {
+      toast.error('Please enter more detailed symptoms');
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axios.post(`${API}/recommendations`, {
