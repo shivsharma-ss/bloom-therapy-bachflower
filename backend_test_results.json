@@ -1,0 +1,1097 @@
+{
+  "total_tests": 12,
+  "passed_tests": 10,
+  "failed_tests": 2,
+  "success_rate": 83.33333333333334,
+  "test_results": [
+    {
+      "test_name": "Basic Symptom Analysis",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Vector: Aspen (0.64), Graph: Agrimony (2.0)",
+      "response_data": {
+        "vector_recommendation": {
+          "remedy_id": "aspen",
+          "remedy_name": "Aspen",
+          "similarity_score": 0.6371084451675415,
+          "symptoms": [
+            "vague fears",
+            "apprehension",
+            "foreboding",
+            "unknown fears",
+            "nightmares",
+            "anxiety without cause",
+            "trembling",
+            "nervousness"
+          ],
+          "remedy_for": "Vague unknown fears and anxieties",
+          "category": "fear",
+          "method": "vector_similarity"
+        },
+        "knowledge_graph_recommendation": {
+          "remedy_id": "agrimony",
+          "remedy_name": "Agrimony",
+          "relevance_score": 2.0,
+          "symptoms": [
+            "anxiety hidden behind cheerful mask",
+            "inner torment",
+            "worry concealed",
+            "restlessness",
+            "torture behind brave face",
+            "mental anguish",
+            "seeks company to avoid being alone with thoughts"
+          ],
+          "remedy_for": "Those who hide worries behind a happy mask",
+          "category": "oversensitive",
+          "connected_remedies": [
+            "Walnut",
+            "Mimulus",
+            "White Chestnut"
+          ],
+          "method": "knowledge_graph"
+        },
+        "symptoms_analyzed": "anxiety, worry, fear, restlessness",
+        "nlp_mode": false
+      }
+    },
+    {
+      "test_name": "NLP Mode Analysis",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Sentiment: -0.15",
+      "response_data": {
+        "vector_recommendation": {
+          "remedy_id": "elm",
+          "remedy_name": "Elm",
+          "similarity_score": 0.6068530082702637,
+          "symptoms": [
+            "overwhelm",
+            "temporary inadequacy",
+            "responsibility burden",
+            "momentary loss of confidence",
+            "feeling inadequate"
+          ],
+          "remedy_for": "Temporary feelings of being overwhelmed",
+          "category": "despondency",
+          "method": "vector_similarity"
+        },
+        "knowledge_graph_recommendation": {
+          "remedy_id": "white_chestnut",
+          "remedy_name": "White Chestnut",
+          "relevance_score": 14.0,
+          "symptoms": [
+            "persistent thoughts",
+            "mental arguments",
+            "worrying thoughts",
+            "insomnia",
+            "racing mind"
+          ],
+          "remedy_for": "Persistent unwanted thoughts and mental arguments",
+          "category": "insufficient_interest",
+          "connected_remedies": [
+            "Agrimony",
+            "Chestnut Bud",
+            "Clematis"
+          ],
+          "method": "knowledge_graph"
+        },
+        "symptoms_analyzed": "overwhelmed by responsibilities, overwork stress, persistent worry about everything, generalized anxiety, racing thoughts, mental chatter, inability to relax, inner tension, restlessness, sleeplessness due to overthinking",
+        "nlp_mode": true,
+        "nlp_analysis": {
+          "sentiment_polarity": -0.15,
+          "sentiment_subjectivity": 0.5111111111111111,
+          "original_text": "I've been feeling overwhelmed at work, constantly worried about everything, and having trouble sleeping. I feel anxious and can't relax."
+        }
+      }
+    },
+    {
+      "test_name": "Save Remedy Selection",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Selection ID: fba18594-25d8-4f15-ab89-f01486200d23",
+      "response_data": {
+        "id": "fba18594-25d8-4f15-ab89-f01486200d23",
+        "user_id": "test_user_1758904425",
+        "symptoms": "stress, tension, overwhelm",
+        "nlp_mode": false,
+        "recommendations": {
+          "vector_recommendation": {
+            "remedy_id": "elm",
+            "remedy_name": "Elm",
+            "similarity_score": 0.5228304266929626,
+            "symptoms": [
+              "overwhelm",
+              "temporary inadequacy",
+              "responsibility burden",
+              "momentary loss of confidence",
+              "feeling inadequate"
+            ],
+            "remedy_for": "Temporary feelings of being overwhelmed",
+            "category": "despondency",
+            "method": "vector_similarity"
+          },
+          "knowledge_graph_recommendation": {
+            "remedy_id": "elm",
+            "remedy_name": "Elm",
+            "relevance_score": 2.0,
+            "symptoms": [
+              "overwhelm",
+              "temporary inadequacy",
+              "responsibility burden",
+              "momentary loss of confidence",
+              "feeling inadequate"
+            ],
+            "remedy_for": "Temporary feelings of being overwhelmed",
+            "category": "despondency",
+            "connected_remedies": [
+              "Crab Apple",
+              "Oak",
+              "Olive"
+            ],
+            "method": "knowledge_graph"
+          },
+          "symptoms_analyzed": "stress, tension, overwhelm",
+          "nlp_mode": false
+        },
+        "timestamp": "2025-09-26T16:34:00.711366Z"
+      }
+    },
+    {
+      "test_name": "Load User Selections",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Found 1 selections, First selection: stress, tension, overwhelm...",
+      "response_data": [
+        {
+          "id": "fba18594-25d8-4f15-ab89-f01486200d23",
+          "user_id": "test_user_1758904425",
+          "symptoms": "stress, tension, overwhelm",
+          "nlp_mode": false,
+          "recommendations": {
+            "vector_recommendation": {
+              "remedy_id": "elm",
+              "remedy_name": "Elm",
+              "similarity_score": 0.5228304266929626,
+              "symptoms": [
+                "overwhelm",
+                "temporary inadequacy",
+                "responsibility burden",
+                "momentary loss of confidence",
+                "feeling inadequate"
+              ],
+              "remedy_for": "Temporary feelings of being overwhelmed",
+              "category": "despondency",
+              "method": "vector_similarity"
+            },
+            "knowledge_graph_recommendation": {
+              "remedy_id": "elm",
+              "remedy_name": "Elm",
+              "relevance_score": 2.0,
+              "symptoms": [
+                "overwhelm",
+                "temporary inadequacy",
+                "responsibility burden",
+                "momentary loss of confidence",
+                "feeling inadequate"
+              ],
+              "remedy_for": "Temporary feelings of being overwhelmed",
+              "category": "despondency",
+              "connected_remedies": [
+                "Crab Apple",
+                "Oak",
+                "Olive"
+              ],
+              "method": "knowledge_graph"
+            },
+            "symptoms_analyzed": "stress, tension, overwhelm",
+            "nlp_mode": false
+          },
+          "timestamp": "2025-09-26T16:34:00.711366Z"
+        }
+      ]
+    },
+    {
+      "test_name": "Update Selection",
+      "status": "\u274c FAILED",
+      "success": false,
+      "details": "Status: 422, Expected: 200, Response: {'detail': [{'type': 'missing', 'loc': ['query', 'updated_symptoms'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.11/v/missing'}]}",
+      "response_data": {
+        "detail": [
+          {
+            "type": "missing",
+            "loc": [
+              "query",
+              "updated_symptoms"
+            ],
+            "msg": "Field required",
+            "input": null,
+            "url": "https://errors.pydantic.dev/2.11/v/missing"
+          }
+        ]
+      }
+    },
+    {
+      "test_name": "Get All Remedies",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Found 39 remedies (Expected 38), Key remedies found: 4/4",
+      "response_data": {
+        "remedies": {
+          "agrimony": {
+            "name": "Agrimony",
+            "symptoms": [
+              "anxiety hidden behind cheerful mask",
+              "inner torment",
+              "worry concealed",
+              "restlessness",
+              "torture behind brave face",
+              "mental anguish",
+              "seeks company to avoid being alone with thoughts"
+            ],
+            "emotional_state": "mental torture hidden behind cheerful facade",
+            "remedy_for": "Those who hide worries behind a happy mask",
+            "category": "oversensitive",
+            "combinations": [
+              "walnut",
+              "mimulus",
+              "white_chestnut"
+            ]
+          },
+          "aspen": {
+            "name": "Aspen",
+            "symptoms": [
+              "vague fears",
+              "apprehension",
+              "foreboding",
+              "unknown fears",
+              "nightmares",
+              "anxiety without cause",
+              "trembling",
+              "nervousness"
+            ],
+            "emotional_state": "fear of unknown things",
+            "remedy_for": "Vague unknown fears and anxieties",
+            "category": "fear",
+            "combinations": [
+              "mimulus",
+              "cherry_plum",
+              "rock_rose"
+            ]
+          },
+          "beech": {
+            "name": "Beech",
+            "symptoms": [
+              "intolerance",
+              "critical",
+              "arrogance",
+              "lack of compassion",
+              "judgmental",
+              "fault-finding",
+              "irritability"
+            ],
+            "emotional_state": "intolerance and criticism of others",
+            "remedy_for": "Intolerance and being overly critical",
+            "category": "overcare",
+            "combinations": [
+              "willow",
+              "impatiens",
+              "vine"
+            ]
+          },
+          "centaury": {
+            "name": "Centaury",
+            "symptoms": [
+              "weakness of will",
+              "subservience",
+              "difficulty saying no",
+              "eager to please",
+              "easily influenced",
+              "weak-willed",
+              "doormat"
+            ],
+            "emotional_state": "inability to say no",
+            "remedy_for": "Those who cannot say no and are easily exploited",
+            "category": "oversensitive",
+            "combinations": [
+              "walnut",
+              "pine",
+              "larch"
+            ]
+          },
+          "cerato": {
+            "name": "Cerato",
+            "symptoms": [
+              "lack of confidence in own judgment",
+              "seeks advice constantly",
+              "doubt own decisions",
+              "easily influenced",
+              "intuition distrust"
+            ],
+            "emotional_state": "doubt in own wisdom",
+            "remedy_for": "Those who doubt their own judgment",
+            "category": "uncertainty",
+            "combinations": [
+              "scleranthus",
+              "wild_oat",
+              "gentian"
+            ]
+          },
+          "cherry_plum": {
+            "name": "Cherry Plum",
+            "symptoms": [
+              "fear of losing control",
+              "desperation",
+              "fear of doing something terrible",
+              "breakdown",
+              "hysteria",
+              "loss of reason"
+            ],
+            "emotional_state": "fear of losing mental control",
+            "remedy_for": "Fear of losing control and desperate thoughts",
+            "category": "fear",
+            "combinations": [
+              "rock_rose",
+              "aspen",
+              "sweet_chestnut"
+            ]
+          },
+          "chestnut_bud": {
+            "name": "Chestnut Bud",
+            "symptoms": [
+              "failure to learn from experience",
+              "repeating mistakes",
+              "lack of observation",
+              "carelessness",
+              "inattention"
+            ],
+            "emotional_state": "failure to learn from mistakes",
+            "remedy_for": "Those who repeat the same mistakes",
+            "category": "insufficient_interest",
+            "combinations": [
+              "honeysuckle",
+              "clematis",
+              "wild_rose"
+            ]
+          },
+          "chicory": {
+            "name": "Chicory",
+            "symptoms": [
+              "possessiveness",
+              "selfishness",
+              "manipulation",
+              "self-pity",
+              "attention seeking",
+              "controlling",
+              "conditional love"
+            ],
+            "emotional_state": "selfish possessive love",
+            "remedy_for": "Possessive love and self-centered care",
+            "category": "overcare",
+            "combinations": [
+              "heather",
+              "willow",
+              "beech"
+            ]
+          },
+          "clematis": {
+            "name": "Clematis",
+            "symptoms": [
+              "dreamy",
+              "absent-minded",
+              "lack of interest in present",
+              "escapism",
+              "drowsiness",
+              "inattention",
+              "living in future"
+            ],
+            "emotional_state": "dreamy inattention to present",
+            "remedy_for": "Dreaminess and lack of interest in present",
+            "category": "insufficient_interest",
+            "combinations": [
+              "wild_rose",
+              "chestnut_bud",
+              "honeysuckle"
+            ]
+          },
+          "crab_apple": {
+            "name": "Crab Apple",
+            "symptoms": [
+              "self-disgust",
+              "feeling unclean",
+              "shame",
+              "poor self-image",
+              "obsession with details",
+              "perfectionism"
+            ],
+            "emotional_state": "self-hatred and disgust",
+            "remedy_for": "Self-disgust and feeling unclean",
+            "category": "despondency",
+            "combinations": [
+              "pine",
+              "larch",
+              "elm"
+            ]
+          },
+          "elm": {
+            "name": "Elm",
+            "symptoms": [
+              "overwhelm",
+              "temporary inadequacy",
+              "responsibility burden",
+              "momentary loss of confidence",
+              "feeling inadequate"
+            ],
+            "emotional_state": "overwhelmed by responsibility",
+            "remedy_for": "Temporary feelings of being overwhelmed",
+            "category": "despondency",
+            "combinations": [
+              "oak",
+              "olive",
+              "hornbeam"
+            ]
+          },
+          "gentian": {
+            "name": "Gentian",
+            "symptoms": [
+              "discouragement",
+              "doubt",
+              "setbacks affect easily",
+              "pessimism",
+              "depression from known cause"
+            ],
+            "emotional_state": "discouragement from setbacks",
+            "remedy_for": "Discouragement and doubt from known causes",
+            "category": "uncertainty",
+            "combinations": [
+              "gorse",
+              "mustard",
+              "cerato"
+            ]
+          },
+          "gorse": {
+            "name": "Gorse",
+            "symptoms": [
+              "hopelessness",
+              "despair",
+              "giving up",
+              "no faith in recovery",
+              "pessimism",
+              "lost hope"
+            ],
+            "emotional_state": "hopelessness and despair",
+            "remedy_for": "Great hopelessness and despair",
+            "category": "uncertainty",
+            "combinations": [
+              "sweet_chestnut",
+              "gentian",
+              "wild_rose"
+            ]
+          },
+          "heather": {
+            "name": "Heather",
+            "symptoms": [
+              "self-centered",
+              "talkative",
+              "attention seeking",
+              "loneliness",
+              "poor listener",
+              "self-obsessed"
+            ],
+            "emotional_state": "self-centered talkativeness",
+            "remedy_for": "Self-centeredness and constant need for attention",
+            "category": "loneliness",
+            "combinations": [
+              "chicory",
+              "impatiens",
+              "water_violet"
+            ]
+          },
+          "holly": {
+            "name": "Holly",
+            "symptoms": [
+              "hatred",
+              "jealousy",
+              "envy",
+              "revenge",
+              "suspicion",
+              "anger",
+              "vexation"
+            ],
+            "emotional_state": "hatred and jealousy",
+            "remedy_for": "Hatred, envy, jealousy and revenge",
+            "category": "oversensitive",
+            "combinations": [
+              "willow",
+              "beech",
+              "vine"
+            ]
+          },
+          "honeysuckle": {
+            "name": "Honeysuckle",
+            "symptoms": [
+              "living in past",
+              "nostalgia",
+              "regret",
+              "homesickness",
+              "dwelling on past",
+              "loss of interest in present"
+            ],
+            "emotional_state": "living in the past",
+            "remedy_for": "Living in the past and nostalgia",
+            "category": "insufficient_interest",
+            "combinations": [
+              "clematis",
+              "wild_rose",
+              "chestnut_bud"
+            ]
+          },
+          "hornbeam": {
+            "name": "Hornbeam",
+            "symptoms": [
+              "mental fatigue",
+              "procrastination",
+              "tiredness before starting",
+              "doubt in ability to cope",
+              "weariness"
+            ],
+            "emotional_state": "mental weariness",
+            "remedy_for": "Mental fatigue and procrastination",
+            "category": "uncertainty",
+            "combinations": [
+              "olive",
+              "elm",
+              "oak"
+            ]
+          },
+          "impatiens": {
+            "name": "Impatiens",
+            "symptoms": [
+              "impatience",
+              "irritability",
+              "hasty",
+              "tension",
+              "intolerance of slow pace",
+              "quick thinking"
+            ],
+            "emotional_state": "impatience and irritability",
+            "remedy_for": "Impatience and irritability with others",
+            "category": "loneliness",
+            "combinations": [
+              "beech",
+              "heather",
+              "vine"
+            ]
+          },
+          "larch": {
+            "name": "Larch",
+            "symptoms": [
+              "lack of confidence",
+              "expects failure",
+              "inferiority complex",
+              "hesitation",
+              "despondency"
+            ],
+            "emotional_state": "lack of confidence",
+            "remedy_for": "Lack of confidence and expectation of failure",
+            "category": "despondency",
+            "combinations": [
+              "cerato",
+              "centaury",
+              "pine"
+            ]
+          },
+          "mimulus": {
+            "name": "Mimulus",
+            "symptoms": [
+              "fear of known things",
+              "shyness",
+              "timidity",
+              "nervousness",
+              "anxiety about specific things",
+              "phobias"
+            ],
+            "emotional_state": "fear of known things",
+            "remedy_for": "Fear of known things and shyness",
+            "category": "fear",
+            "combinations": [
+              "aspen",
+              "larch",
+              "agrimony"
+            ]
+          },
+          "mustard": {
+            "name": "Mustard",
+            "symptoms": [
+              "depression without cause",
+              "gloom",
+              "melancholy",
+              "sadness",
+              "dark cloud feeling"
+            ],
+            "emotional_state": "deep depression without reason",
+            "remedy_for": "Deep depression that comes and goes without reason",
+            "category": "insufficient_interest",
+            "combinations": [
+              "gentian",
+              "gorse",
+              "sweet_chestnut"
+            ]
+          },
+          "oak": {
+            "name": "Oak",
+            "symptoms": [
+              "exhaustion but keeps going",
+              "never gives up",
+              "duty bound",
+              "stubborn persistence",
+              "overwork"
+            ],
+            "emotional_state": "exhausted but struggling on",
+            "remedy_for": "Those who struggle on despite exhaustion",
+            "category": "despondency",
+            "combinations": [
+              "elm",
+              "olive",
+              "hornbeam"
+            ]
+          },
+          "olive": {
+            "name": "Olive",
+            "symptoms": [
+              "complete exhaustion",
+              "drained",
+              "no reserves left",
+              "worn out",
+              "fatigue"
+            ],
+            "emotional_state": "complete mental and physical exhaustion",
+            "remedy_for": "Complete exhaustion of mind and body",
+            "category": "insufficient_interest",
+            "combinations": [
+              "oak",
+              "elm",
+              "hornbeam"
+            ]
+          },
+          "pine": {
+            "name": "Pine",
+            "symptoms": [
+              "guilt",
+              "self-reproach",
+              "blame self for others' mistakes",
+              "never satisfied with efforts",
+              "apologetic"
+            ],
+            "emotional_state": "guilt and self-reproach",
+            "remedy_for": "Guilt and self-reproach",
+            "category": "despondency",
+            "combinations": [
+              "crab_apple",
+              "larch",
+              "centaury"
+            ]
+          },
+          "red_chestnut": {
+            "name": "Red Chestnut",
+            "symptoms": [
+              "excessive worry for others",
+              "fearful for loved ones",
+              "anxiety for others' wellbeing",
+              "over-concern"
+            ],
+            "emotional_state": "excessive concern for others",
+            "remedy_for": "Excessive worry and fear for others",
+            "category": "overcare",
+            "combinations": [
+              "chicory",
+              "vine",
+              "beech"
+            ]
+          },
+          "rescue_remedy": {
+            "name": "Rescue Remedy",
+            "symptoms": [
+              "emergency",
+              "trauma",
+              "shock",
+              "panic",
+              "crisis",
+              "stress",
+              "accident"
+            ],
+            "emotional_state": "emergency and crisis situations",
+            "remedy_for": "Emergency situations, trauma, shock and crisis",
+            "category": "emergency",
+            "combinations": [
+              "rock_rose",
+              "impatiens",
+              "cherry_plum",
+              "star_of_bethlehem",
+              "clematis"
+            ]
+          },
+          "rock_rose": {
+            "name": "Rock Rose",
+            "symptoms": [
+              "terror",
+              "panic",
+              "nightmare",
+              "extreme fear",
+              "helplessness",
+              "emergency"
+            ],
+            "emotional_state": "extreme terror and panic",
+            "remedy_for": "Terror, panic and extreme fear",
+            "category": "fear",
+            "combinations": [
+              "cherry_plum",
+              "aspen",
+              "mimulus"
+            ]
+          },
+          "rock_water": {
+            "name": "Rock Water",
+            "symptoms": [
+              "self-denial",
+              "rigidity",
+              "self-discipline",
+              "hard on self",
+              "strict principles",
+              "inflexibility"
+            ],
+            "emotional_state": "rigid self-discipline",
+            "remedy_for": "Self-denial and rigid adherence to principles",
+            "category": "overcare",
+            "combinations": [
+              "vine",
+              "beech",
+              "oak"
+            ]
+          },
+          "scleranthus": {
+            "name": "Scleranthus",
+            "symptoms": [
+              "indecision",
+              "uncertainty between choices",
+              "mood swings",
+              "hesitation",
+              "vacillation"
+            ],
+            "emotional_state": "indecision between alternatives",
+            "remedy_for": "Indecision and uncertainty between two choices",
+            "category": "uncertainty",
+            "combinations": [
+              "cerato",
+              "wild_oat",
+              "gentian"
+            ]
+          },
+          "star_of_bethlehem": {
+            "name": "Star of Bethlehem",
+            "symptoms": [
+              "shock",
+              "trauma",
+              "grief",
+              "distress",
+              "after-effects of shock",
+              "comfort"
+            ],
+            "emotional_state": "shock and trauma",
+            "remedy_for": "Shock, trauma and grief",
+            "category": "despondency",
+            "combinations": [
+              "sweet_chestnut",
+              "willow",
+              "pine"
+            ]
+          },
+          "sweet_chestnut": {
+            "name": "Sweet Chestnut",
+            "symptoms": [
+              "extreme mental anguish",
+              "despair",
+              "limit of endurance",
+              "dark night of soul",
+              "hopelessness"
+            ],
+            "emotional_state": "extreme mental anguish",
+            "remedy_for": "Extreme mental anguish and despair",
+            "category": "despondency",
+            "combinations": [
+              "gorse",
+              "cherry_plum",
+              "star_of_bethlehem"
+            ]
+          },
+          "vervain": {
+            "name": "Vervain",
+            "symptoms": [
+              "over-enthusiasm",
+              "fanaticism",
+              "strain",
+              "tension",
+              "fixed ideas",
+              "missionary zeal"
+            ],
+            "emotional_state": "over-enthusiasm and strain",
+            "remedy_for": "Over-enthusiasm and fixed ideas",
+            "category": "overcare",
+            "combinations": [
+              "vine",
+              "impatiens",
+              "beech"
+            ]
+          },
+          "vine": {
+            "name": "Vine",
+            "symptoms": [
+              "dominating",
+              "inflexible",
+              "tyrannical",
+              "arrogant",
+              "ruthless",
+              "ambitious",
+              "leadership"
+            ],
+            "emotional_state": "domination and inflexibility",
+            "remedy_for": "Dominating behavior and inflexibility",
+            "category": "overcare",
+            "combinations": [
+              "beech",
+              "vervain",
+              "impatiens"
+            ]
+          },
+          "walnut": {
+            "name": "Walnut",
+            "symptoms": [
+              "influenced by others",
+              "life changes",
+              "transition",
+              "protection from change",
+              "easily led"
+            ],
+            "emotional_state": "influenced by change and others",
+            "remedy_for": "Protection during change and transition",
+            "category": "oversensitive",
+            "combinations": [
+              "centaury",
+              "cerato",
+              "agrimony"
+            ]
+          },
+          "water_violet": {
+            "name": "Water Violet",
+            "symptoms": [
+              "pride",
+              "aloofness",
+              "superiority",
+              "independence",
+              "withdrawn",
+              "self-reliant"
+            ],
+            "emotional_state": "proud aloofness",
+            "remedy_for": "Pride and aloof superiority",
+            "category": "loneliness",
+            "combinations": [
+              "impatiens",
+              "heather",
+              "vine"
+            ]
+          },
+          "white_chestnut": {
+            "name": "White Chestnut",
+            "symptoms": [
+              "persistent thoughts",
+              "mental arguments",
+              "worrying thoughts",
+              "insomnia",
+              "racing mind"
+            ],
+            "emotional_state": "persistent unwanted thoughts",
+            "remedy_for": "Persistent unwanted thoughts and mental arguments",
+            "category": "insufficient_interest",
+            "combinations": [
+              "agrimony",
+              "clematis",
+              "mustard"
+            ]
+          },
+          "wild_oat": {
+            "name": "Wild Oat",
+            "symptoms": [
+              "uncertainty about life path",
+              "ambition without direction",
+              "dissatisfaction",
+              "unclear goals"
+            ],
+            "emotional_state": "uncertainty about life direction",
+            "remedy_for": "Uncertainty about life direction and goals",
+            "category": "uncertainty",
+            "combinations": [
+              "scleranthus",
+              "cerato",
+              "gentian"
+            ]
+          },
+          "wild_rose": {
+            "name": "Wild Rose",
+            "symptoms": [
+              "apathy",
+              "resignation",
+              "lack of interest",
+              "drift through life",
+              "no effort",
+              "acceptance of fate"
+            ],
+            "emotional_state": "resignation and apathy",
+            "remedy_for": "Apathy and resignation to circumstances",
+            "category": "insufficient_interest",
+            "combinations": [
+              "clematis",
+              "honeysuckle",
+              "gorse"
+            ]
+          },
+          "willow": {
+            "name": "Willow",
+            "symptoms": [
+              "resentment",
+              "bitterness",
+              "self-pity",
+              "victim mentality",
+              "blame others",
+              "grudges"
+            ],
+            "emotional_state": "resentment and bitterness",
+            "remedy_for": "Resentment and bitter thoughts",
+            "category": "despondency",
+            "combinations": [
+              "holly",
+              "beech",
+              "chicory"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "test_name": "Get Specific Remedy",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Remedy: Rescue Remedy, Connected: 5",
+      "response_data": {
+        "remedy": {
+          "name": "Rescue Remedy",
+          "symptoms": [
+            "emergency",
+            "trauma",
+            "shock",
+            "panic",
+            "crisis",
+            "stress",
+            "accident"
+          ],
+          "emotional_state": "emergency and crisis situations",
+          "remedy_for": "Emergency situations, trauma, shock and crisis",
+          "category": "emergency",
+          "combinations": [
+            "rock_rose",
+            "impatiens",
+            "cherry_plum",
+            "star_of_bethlehem",
+            "clematis"
+          ]
+        },
+        "connected_remedies": [
+          {
+            "id": "rock_rose",
+            "name": "Rock Rose",
+            "category": "fear"
+          },
+          {
+            "id": "impatiens",
+            "name": "Impatiens",
+            "category": "loneliness"
+          },
+          {
+            "id": "cherry_plum",
+            "name": "Cherry Plum",
+            "category": "fear"
+          },
+          {
+            "id": "star_of_bethlehem",
+            "name": "Star of Bethlehem",
+            "category": "despondency"
+          },
+          {
+            "id": "clematis",
+            "name": "Clematis",
+            "category": "insufficient_interest"
+          }
+        ]
+      }
+    },
+    {
+      "test_name": "Admin Add Knowledge Source",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Source ID: 89ed2e1f-3263-45a1-8ee0-4a5ecc382709",
+      "response_data": {
+        "id": "89ed2e1f-3263-45a1-8ee0-4a5ecc382709",
+        "source_type": "text",
+        "content": "Test knowledge source for Bach flower remedies testing",
+        "source_url": "https://example.com/test",
+        "processed": false,
+        "timestamp": "2025-09-26T16:34:00.943887Z"
+      }
+    },
+    {
+      "test_name": "Admin Get Knowledge Sources",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Found 2 knowledge sources",
+      "response_data": [
+        {
+          "id": "53b46aba-3823-4864-94cf-5d073cca32a7",
+          "source_type": "text",
+          "content": "Bach flower remedy research shows that Star of Bethlehem is excellent for trauma and shock, helping to comfort and soothe after distressing events.",
+          "source_url": "https://example.com/bach-research",
+          "processed": false,
+          "timestamp": "2025-09-26T16:30:12.453395Z"
+        },
+        {
+          "id": "89ed2e1f-3263-45a1-8ee0-4a5ecc382709",
+          "source_type": "text",
+          "content": "Test knowledge source for Bach flower remedies testing",
+          "source_url": "https://example.com/test",
+          "processed": false,
+          "timestamp": "2025-09-26T16:34:00.943887Z"
+        }
+      ]
+    },
+    {
+      "test_name": "Admin Rebuild Knowledge Base",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200, Message: Knowledge base rebuilt successfully. Processed 2 s...",
+      "response_data": {
+        "message": "Knowledge base rebuilt successfully. Processed 2 sources."
+      }
+    },
+    {
+      "test_name": "Error Handling - Invalid Remedy ID",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 404",
+      "response_data": null
+    },
+    {
+      "test_name": "Error Handling - Empty Symptoms",
+      "status": "\u274c FAILED",
+      "success": false,
+      "details": "Status: 200, Expected: 500, Response: {'vector_recommendation': {'remedy_id': 'crab_apple', 'remedy_name': 'Crab Apple', 'similarity_score': 0.21379071474075317, 'symptoms': ['self-disgust', 'feeling unclean', 'shame', 'poor self-image', ",
+      "response_data": null
+    }
+  ]
+}
