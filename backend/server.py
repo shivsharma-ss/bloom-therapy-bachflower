@@ -827,10 +827,58 @@ def find_knowledge_graph_matches(symptoms: str, top_k: int = 2) -> List[Dict[str
     
     return matches
 
+def suggest_remedy_combinations(symptoms: str, primary_remedies: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Suggest remedy combinations based on symptoms and analysis"""
+    
+    symptom_words = set(symptoms.lower().split())
+    suggestions = []
+    
+    # Check for matching predefined combinations
+    for combo_id, combo_data in REMEDY_COMBINATIONS.items():
+        combo_score = 0
+        
+        # Check if symptoms match the combination's purpose
+        suitable_for_words = set(' '.join(combo_data['suitable_for']).lower().split())
+        combo_score += len(symptom_words.intersection(suitable_for_words)) * 3
+        
+        # Check if any primary remedies are in this combination
+        primary_remedy_ids = [r['remedy_id'] for r in primary_remedies]
+        matching_remedies = set(combo_data['remedies']).intersection(set(primary_remedy_ids))
+        combo_score += len(matching_remedies) * 5
+        
+        if combo_score > 0:
+            # Build remedy details for the combination
+            remedy_details = []
+            for remedy_id in combo_data['remedies']:
+                if remedy_id in BACH_REMEDIES:
+                    remedy_details.append({
+                        'id': remedy_id,
+                        'name': BACH_REMEDIES[remedy_id]['name'],
+                        'drops': combo_data['concentrations'].get(remedy_id, 2),
+                        'summary': BACH_REMEDIES[remedy_id]['summary']
+                    })
+            
+            suggestions.append({
+                'combination_id': combo_id,
+                'name': combo_data['name'],
+                'remedies': remedy_details,
+                'total_drops': combo_data['total_drops'],
+                'bottle_size': combo_data['bottle_size'],
+                'dosage': combo_data['dosage'],
+                'purpose': combo_data['purpose'],
+                'suitable_for': combo_data['suitable_for'],
+                'relevance_score': min(10, max(1, combo_score)),
+                'matching_primary': list(matching_remedies)
+            })
+    
+    # Sort by relevance and return top 2
+    suggestions.sort(key=lambda x: x['relevance_score'], reverse=True)
+    return suggestions[:2]
+
 # API Routes
 @api_router.post("/recommendations", response_model=Dict[str, Any])
 async def get_recommendations(request: RecommendationRequest):
-    """Get Bach flower remedy recommendations"""
+    """Get Bach flower remedy recommendations with combinations"""
     
     try:
         symptoms_text = request.symptoms
@@ -844,12 +892,22 @@ async def get_recommendations(request: RecommendationRequest):
         vector_matches = find_vector_matches(symptoms_text, top_k=1)
         graph_matches = find_knowledge_graph_matches(symptoms_text, top_k=1)
         
+        # Get combination suggestions
+        all_matches = vector_matches + graph_matches
+        combination_suggestions = suggest_remedy_combinations(symptoms_text, all_matches)
+        
         # Combine and format results
         recommendations = {
             'vector_recommendation': vector_matches[0] if vector_matches else None,
             'knowledge_graph_recommendation': graph_matches[0] if graph_matches else None,
+            'combination_suggestions': combination_suggestions,
             'symptoms_analyzed': symptoms_text,
-            'nlp_mode': request.nlp_mode
+            'nlp_mode': request.nlp_mode,
+            'scoring_info': {
+                'relevance_scale': '1-10 (10 = extremely relevant)',
+                'vector_similarity_range': '0.0-1.0 (higher = more similar)',
+                'combination_matching': 'Based on symptom overlap and remedy inclusion'
+            }
         }
         
         if request.nlp_mode:
@@ -863,6 +921,181 @@ async def get_recommendations(request: RecommendationRequest):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating recommendations: {str(e)}")
+
+@api_router.get("/remedies/{remedy_id}/details", response_model=Dict[str, Any])
+async def get_remedy_details_full(remedy_id: str):
+    """Get comprehensive details for a specific remedy"""
+    
+    if remedy_id not in BACH_REMEDIES:
+        raise HTTPException(status_code=404, detail="Remedy not found")
+    
+    remedy_data = BACH_REMEDIES[remedy_id]
+    
+    # Get connected remedies from knowledge graph
+    connected_remedies = []
+    if knowledge_graph.has_node(remedy_id):
+        neighbors = list(knowledge_graph.neighbors(remedy_id))
+        connected_remedies = [
+            {
+                'id': neighbor,
+                'name': BACH_REMEDIES[neighbor]['name'],
+                'category': BACH_REMEDIES[neighbor]['category'],
+                'summary': BACH_REMEDIES[neighbor]['summary']
+            }
+            for neighbor in neighbors
+        ]
+    
+    # Find combinations containing this remedy
+    containing_combinations = []
+    for combo_id, combo_data in REMEDY_COMBINATIONS.items():
+        if remedy_id in combo_data['remedies']:
+            containing_combinations.append({
+                'id': combo_id,
+                'name': combo_data['name'],
+                'purpose': combo_data['purpose'],
+                'dosage': combo_data['dosage']
+            })
+    
+    return {
+        'remedy': remedy_data,
+        'connected_remedies': connected_remedies,
+        'containing_combinations': containing_combinations,
+        'usage_guidelines': {
+            'standard_dose': '2 drops in 30ml mixing bottle',
+            'frequency': '4 drops, 4 times daily from mixing bottle',
+            'emergency_use': 'Can be increased to every 20-30 minutes for first 6 doses',
+            'children': 'Reduce frequency for sensitive individuals'
+        }
+    }
+
+# Protected Admin Routes
+@api_router.get("/admin/vector-database", dependencies=[Depends(verify_admin_credentials)])
+async def get_vector_database_data():
+    """Get vector database visualization data for admin"""
+    
+    try:
+        # Create embeddings for all remedies
+        remedy_data = []
+        for remedy_id, remedy_info in BACH_REMEDIES.items():
+            text = f"{' '.join(remedy_info['symptoms'])} {remedy_info['emotional_state']}"
+            embedding = embedding_model.encode([text])[0]
+            
+            remedy_data.append({
+                'id': remedy_id,
+                'name': remedy_info['name'],
+                'category': remedy_info['category'],
+                'embedding_preview': embedding[:5].tolist(),  # First 5 dimensions for preview
+                'vector_length': len(embedding),
+                'symptoms_count': len(remedy_info['symptoms'])
+            })
+        
+        return {
+            'total_remedies': len(remedy_data),
+            'embedding_dimensions': len(embedding_model.encode(['test'])[0]),
+            'remedies': remedy_data,
+            'model_info': {
+                'name': 'all-MiniLM-L6-v2',
+                'description': 'Sentence transformer model for semantic similarity'
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error retrieving vector database: {str(e)}")
+
+@api_router.get("/admin/knowledge-graph", dependencies=[Depends(verify_admin_credentials)])
+async def get_knowledge_graph_data():
+    """Get knowledge graph visualization data for admin"""
+    
+    try:
+        # Prepare nodes and edges data
+        nodes = []
+        edges = []
+        
+        for remedy_id, remedy_data in BACH_REMEDIES.items():
+            nodes.append({
+                'id': remedy_id,
+                'name': remedy_data['name'],
+                'category': remedy_data['category'],
+                'symptoms_count': len(remedy_data['symptoms']),
+                'connections': len(remedy_data.get('combinations', []))
+            })
+        
+        # Create edges from combinations
+        for remedy_id, remedy_data in BACH_REMEDIES.items():
+            for connected_id in remedy_data.get('combinations', []):
+                if connected_id in BACH_REMEDIES:
+                    edges.append({
+                        'source': remedy_id,
+                        'target': connected_id,
+                        'weight': 0.8,
+                        'type': 'combination'
+                    })
+        
+        # Add category connections
+        categories = {}
+        for remedy_id, remedy_data in BACH_REMEDIES.items():
+            category = remedy_data['category']
+            if category not in categories:
+                categories[category] = []
+            categories[category].append(remedy_id)
+        
+        # Add category edges (lighter weight)
+        for category, remedy_ids in categories.items():
+            for i, remedy1 in enumerate(remedy_ids):
+                for remedy2 in remedy_ids[i+1:]:
+                    edges.append({
+                        'source': remedy1,
+                        'target': remedy2,
+                        'weight': 0.3,
+                        'type': 'category'
+                    })
+        
+        return {
+            'nodes': nodes,
+            'edges': edges,
+            'categories': list(categories.keys()),
+            'statistics': {
+                'total_nodes': len(nodes),
+                'total_edges': len(edges),
+                'categories_count': len(categories),
+                'average_connections': sum(len(r.get('combinations', [])) for r in BACH_REMEDIES.values()) / len(BACH_REMEDIES)
+            }
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error retrieving knowledge graph: {str(e)}")
+
+@api_router.get("/combinations", response_model=Dict[str, Any])
+async def get_all_combinations():
+    """Get all available remedy combinations"""
+    
+    combinations_with_details = {}
+    for combo_id, combo_data in REMEDY_COMBINATIONS.items():
+        # Add remedy details to each combination
+        remedy_details = []
+        for remedy_id in combo_data['remedies']:
+            if remedy_id in BACH_REMEDIES:
+                remedy_details.append({
+                    'id': remedy_id,
+                    'name': BACH_REMEDIES[remedy_id]['name'],
+                    'drops': combo_data['concentrations'].get(remedy_id, 2),
+                    'summary': BACH_REMEDIES[remedy_id]['summary']
+                })
+        
+        combinations_with_details[combo_id] = {
+            **combo_data,
+            'remedy_details': remedy_details
+        }
+    
+    return {
+        'combinations': combinations_with_details,
+        'usage_guidelines': {
+            'mixing_instructions': 'Add specified drops of each remedy to 30ml mixing bottle with spring water',
+            'preservation': 'Add 1-2 teaspoons of brandy, apple cider vinegar, or glycerin as preservative',
+            'standard_dosage': '4 drops from mixing bottle, 4 times daily',
+            'emergency_dosage': 'Can increase frequency to every 20-30 minutes for first 6 doses'
+        }
+    }
 
 @api_router.post("/remedy-selections", response_model=RemedySelection)
 async def save_remedy_selection(selection: RemedySelectionCreate):
