@@ -862,7 +862,7 @@ function App() {
 
               {/* Analytics Cards */}
               <div className="grid md:grid-cols-3 gap-6">
-                <Card className="bg-gradient-to-br from-teal-800/40 to-teal-900/40 border-teal-500/20">
+                <Card className="bg-gradient-to-br from-teal-800/40 to-teal-900/40 border-teal-500/20 hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-500">
                   <CardHeader>
                     <CardTitle className="text-teal-200 flex items-center gap-2">
                       <Database className="w-5 h-5" />
@@ -877,7 +877,7 @@ function App() {
                         <p className="text-teal-100">Model: <strong>{vectorData.model_info.name}</strong></p>
                       </div>
                     ) : (
-                      <Button onClick={loadVectorData} variant="outline" size="sm">
+                      <Button onClick={loadVectorData} variant="outline" size="sm" className="border-teal-400/30 text-teal-200">
                         <Eye className="w-4 h-4 mr-1" />
                         Load Data
                       </Button>
@@ -885,7 +885,7 @@ function App() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-orange-800/40 to-orange-900/40 border-orange-500/20">
+                <Card className="bg-gradient-to-br from-orange-800/40 to-orange-900/40 border-orange-500/20 hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-500">
                   <CardHeader>
                     <CardTitle className="text-orange-200 flex items-center gap-2">
                       <Network className="w-5 h-5" />
@@ -900,7 +900,7 @@ function App() {
                         <p className="text-orange-100">Categories: <strong>{graphData.statistics.categories_count}</strong></p>
                       </div>
                     ) : (
-                      <Button onClick={loadGraphData} variant="outline" size="sm">
+                      <Button onClick={loadGraphData} variant="outline" size="sm" className="border-orange-400/30 text-orange-200">
                         <Eye className="w-4 h-4 mr-1" />
                         Load Data
                       </Button>
@@ -908,7 +908,7 @@ function App() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-purple-800/40 to-purple-900/40 border-purple-500/20">
+                <Card className="bg-gradient-to-br from-purple-800/40 to-purple-900/40 border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-500">
                   <CardHeader>
                     <CardTitle className="text-purple-200 flex items-center gap-2">
                       <FlaskConical className="w-5 h-5" />
@@ -918,11 +918,25 @@ function App() {
                   <CardContent>
                     <div className="space-y-2 text-sm">
                       <p className="text-purple-100">Available Blends: <strong>{Object.keys(combinations).length}</strong></p>
-                      <p className="text-purple-100">Max Remedies: <strong>6-7 per blend</strong></p>
-                      <p className="text-purple-100">Standard Dose: <strong>2 drops each</strong></p>
+                      <p className="text-purple-100">Traditional Formulas: <strong>Dr. Bach + Practitioner</strong></p>
+                      <p className="text-purple-100">Concentration: <strong>Variable drops per remedy</strong></p>
                     </div>
                   </CardContent>
                 </Card>
+              </div>
+
+              {/* Network Visualizations */}
+              <div className="grid lg:grid-cols-2 gap-6">
+                <NetworkGraph 
+                  graphData={graphData}
+                  title="Bach Flower Knowledge Graph"
+                  type="knowledge"
+                />
+                
+                <VectorVisualization 
+                  vectorData={vectorData}
+                  title="Vector Database Visualization"
+                />
               </div>
 
               {/* Knowledge Source Management */}
