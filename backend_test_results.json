@@ -1,8 +1,8 @@
 {
   "total_tests": 12,
-  "passed_tests": 10,
-  "failed_tests": 2,
-  "success_rate": 83.33333333333334,
+  "passed_tests": 11,
+  "failed_tests": 1,
+  "success_rate": 91.66666666666666,
   "test_results": [
     {
       "test_name": "Basic Symptom Analysis",
@@ -63,7 +63,7 @@
         "vector_recommendation": {
           "remedy_id": "elm",
           "remedy_name": "Elm",
-          "similarity_score": 0.6068530082702637,
+          "similarity_score": 0.5333559513092041,
           "symptoms": [
             "overwhelm",
             "temporary inadequacy",
@@ -76,26 +76,26 @@
           "method": "vector_similarity"
         },
         "knowledge_graph_recommendation": {
-          "remedy_id": "white_chestnut",
-          "remedy_name": "White Chestnut",
-          "relevance_score": 14.0,
+          "remedy_id": "chestnut_bud",
+          "remedy_name": "Chestnut Bud",
+          "relevance_score": 12.5,
           "symptoms": [
-            "persistent thoughts",
-            "mental arguments",
-            "worrying thoughts",
-            "insomnia",
-            "racing mind"
+            "failure to learn from experience",
+            "repeating mistakes",
+            "lack of observation",
+            "carelessness",
+            "inattention"
           ],
-          "remedy_for": "Persistent unwanted thoughts and mental arguments",
+          "remedy_for": "Those who repeat the same mistakes",
           "category": "insufficient_interest",
           "connected_remedies": [
-            "Agrimony",
-            "Chestnut Bud",
-            "Clematis"
+            "Honeysuckle",
+            "Clematis",
+            "Wild Rose"
           ],
           "method": "knowledge_graph"
         },
-        "symptoms_analyzed": "overwhelmed by responsibilities, overwork stress, persistent worry about everything, generalized anxiety, racing thoughts, mental chatter, inability to relax, inner tension, restlessness, sleeplessness due to overthinking",
+        "symptoms_analyzed": "feeling overwhelmed by responsibilities, constant worrying, persistent anxious thoughts, difficulty switching off the mind, trouble sleeping from overthinking, generalized anxiety, inner restlessness, inability to relax, nervous tension",
         "nlp_mode": true,
         "nlp_analysis": {
           "sentiment_polarity": -0.15,
@@ -108,10 +108,10 @@
       "test_name": "Save Remedy Selection",
       "status": "\u2705 PASSED",
       "success": true,
-      "details": "Status: 200, Selection ID: fba18594-25d8-4f15-ab89-f01486200d23",
+      "details": "Status: 200, Selection ID: 665f4668-164e-49be-bc96-7ab66d4d7291",
       "response_data": {
-        "id": "fba18594-25d8-4f15-ab89-f01486200d23",
-        "user_id": "test_user_1758904425",
+        "id": "665f4668-164e-49be-bc96-7ab66d4d7291",
+        "user_id": "test_user_1758904475",
         "symptoms": "stress, tension, overwhelm",
         "nlp_mode": false,
         "recommendations": {
@@ -153,7 +153,7 @@
           "symptoms_analyzed": "stress, tension, overwhelm",
           "nlp_mode": false
         },
-        "timestamp": "2025-09-26T16:34:00.711366Z"
+        "timestamp": "2025-09-26T16:34:54.919411Z"
       }
     },
     {
@@ -163,8 +163,8 @@
       "details": "Status: 200, Found 1 selections, First selection: stress, tension, overwhelm...",
       "response_data": [
         {
-          "id": "fba18594-25d8-4f15-ab89-f01486200d23",
-          "user_id": "test_user_1758904425",
+          "id": "665f4668-164e-49be-bc96-7ab66d4d7291",
+          "user_id": "test_user_1758904475",
           "symptoms": "stress, tension, overwhelm",
           "nlp_mode": false,
           "recommendations": {
@@ -206,28 +206,17 @@
             "symptoms_analyzed": "stress, tension, overwhelm",
             "nlp_mode": false
           },
-          "timestamp": "2025-09-26T16:34:00.711366Z"
+          "timestamp": "2025-09-26T16:34:54.919411Z"
         }
       ]
     },
     {
       "test_name": "Update Selection",
-      "status": "\u274c FAILED",
-      "success": false,
-      "details": "Status: 422, Expected: 200, Response: {'detail': [{'type': 'missing', 'loc': ['query', 'updated_symptoms'], 'msg': 'Field required', 'input': None, 'url': 'https://errors.pydantic.dev/2.11/v/missing'}]}",
+      "status": "\u2705 PASSED",
+      "success": true,
+      "details": "Status: 200",
       "response_data": {
-        "detail": [
-          {
-            "type": "missing",
-            "loc": [
-              "query",
-              "updated_symptoms"
-            ],
-            "msg": "Field required",
-            "input": null,
-            "url": "https://errors.pydantic.dev/2.11/v/missing"
-          }
-        ]
+        "message": "Selection updated successfully"
       }
     },
     {
@@ -1036,28 +1025,28 @@
       "test_name": "Admin Add Knowledge Source",
       "status": "\u2705 PASSED",
       "success": true,
-      "details": "Status: 200, Source ID: 89ed2e1f-3263-45a1-8ee0-4a5ecc382709",
+      "details": "Status: 200, Source ID: da23f0d8-62fb-496c-815c-1db9fd62bf0b",
       "response_data": {
-        "id": "89ed2e1f-3263-45a1-8ee0-4a5ecc382709",
+        "id": "da23f0d8-62fb-496c-815c-1db9fd62bf0b",
         "source_type": "text",
         "content": "Test knowledge source for Bach flower remedies testing",
         "source_url": "https://example.com/test",
         "processed": false,
-        "timestamp": "2025-09-26T16:34:00.943887Z"
+        "timestamp": "2025-09-26T16:34:56.168176Z"
       }
     },
     {
       "test_name": "Admin Get Knowledge Sources",
       "status": "\u2705 PASSED",
       "success": true,
-      "details": "Status: 200, Found 2 knowledge sources",
+      "details": "Status: 200, Found 3 knowledge sources",
       "response_data": [
         {
           "id": "53b46aba-3823-4864-94cf-5d073cca32a7",
           "source_type": "text",
           "content": "Bach flower remedy research shows that Star of Bethlehem is excellent for trauma and shock, helping to comfort and soothe after distressing events.",
           "source_url": "https://example.com/bach-research",
-          "processed": false,
+          "processed": true,
           "timestamp": "2025-09-26T16:30:12.453395Z"
         },
         {
@@ -1065,8 +1054,16 @@
           "source_type": "text",
           "content": "Test knowledge source for Bach flower remedies testing",
           "source_url": "https://example.com/test",
-          "processed": false,
+          "processed": true,
           "timestamp": "2025-09-26T16:34:00.943887Z"
+        },
+        {
+          "id": "da23f0d8-62fb-496c-815c-1db9fd62bf0b",
+          "source_type": "text",
+          "content": "Test knowledge source for Bach flower remedies testing",
+          "source_url": "https://example.com/test",
+          "processed": false,
+          "timestamp": "2025-09-26T16:34:56.168176Z"
         }
       ]
     },
@@ -1074,9 +1071,9 @@
       "test_name": "Admin Rebuild Knowledge Base",
       "status": "\u2705 PASSED",
       "success": true,
-      "details": "Status: 200, Message: Knowledge base rebuilt successfully. Processed 2 s...",
+      "details": "Status: 200, Message: Knowledge base rebuilt successfully. Processed 1 s...",
       "response_data": {
-        "message": "Knowledge base rebuilt successfully. Processed 2 sources."
+        "message": "Knowledge base rebuilt successfully. Processed 1 sources."
       }
     },
     {
