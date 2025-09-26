@@ -36,6 +36,18 @@ api_router = APIRouter(prefix="/api")
 # Initialize AI components
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 knowledge_graph = nx.Graph()
+security = HTTPBasic()
+
+# Admin credentials
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+
+def verify_admin_credentials(credentials: HTTPBasicCredentials = Depends(security)):
+    is_correct_username = secrets.compare_digest(credentials.username, ADMIN_USERNAME)
+    is_correct_password = secrets.compare_digest(credentials.password, ADMIN_PASSWORD)
+    if not (is_correct_username and is_correct_password):
+        raise HTTPException(status_code=401, detail="Invalid admin credentials")
+    return credentials.username
 
 # Bach Flower Remedy Knowledge Base
 BACH_REMEDIES = {
