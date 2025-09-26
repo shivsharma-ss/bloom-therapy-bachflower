@@ -836,6 +836,10 @@ def find_knowledge_graph_matches(symptoms: str, top_k: int = 2) -> List[Dict[str
             # Convert raw score to 1-10 relevance scale
             relevance_score = min(10, max(1, round(raw_score / 2)))
             
+            # Calculate similarity score for consistency (normalized version of relevance)
+            max_possible_score = max([scores[r] for r in scores.keys()] + [1])  # Avoid division by zero
+            similarity_score = min(1.0, max(0.1, raw_score / max_possible_score))
+            
             # Get connected remedies for combination suggestions
             connected_remedies = []
             if knowledge_graph.has_node(remedy_id):
@@ -854,6 +858,7 @@ def find_knowledge_graph_matches(symptoms: str, top_k: int = 2) -> List[Dict[str
                 'remedy_name': remedy_data['name'],
                 'raw_score': raw_score,
                 'relevance_score': relevance_score,
+                'similarity_score': similarity_score,  # Added for UI consistency
                 'symptoms': remedy_data['symptoms'],
                 'remedy_for': remedy_data['remedy_for'],
                 'category': remedy_data['category'],
