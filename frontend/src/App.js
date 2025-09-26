@@ -403,10 +403,23 @@ function App() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {userSelections.length === 0 ? (
-                  <p className="text-center text-slate-500 py-8">
-                    No selections saved yet. Analyze some symptoms to get started!
-                  </p>
+                {loadingSelections ? (
+                  <div className="text-center py-8">
+                    <div className="loading-spinner mx-auto mb-2"></div>
+                    <p className="text-slate-500">Loading your selections...</p>
+                  </div>
+                ) : userSelections.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-slate-500 mb-2">No selections saved yet.</p>
+                    <p className="text-sm text-slate-400">Analyze some symptoms to get started!</p>
+                    <Button 
+                      onClick={() => setActiveTab('analyze')}
+                      variant="outline"
+                      className="mt-4"
+                    >
+                      Start Analysis
+                    </Button>
+                  </div>
                 ) : (
                   <div className="space-y-4">
                     {userSelections.map((selection, index) => (
